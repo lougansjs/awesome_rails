@@ -1,0 +1,59 @@
+<section class="section">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+        <div class="login-brand">
+          <%= image_tag(asset_path("stisla-fill.svg"), size: 100, alt: "logo", class: "shadow-light rounded-circle") %>
+        </div>
+
+        <div class="card card-primary">
+          <div class="card-header"><h4>Login</h4></div>
+
+          <div class="card-body">
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'needs-validation'}) do |f| %>
+              <div class="form-group">
+                <%= f.label :email, 'E-mail' %>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", "tabindex" => "1", class: "form-control", required: true %>
+                <div class="invalid-feedback">
+                  Por favor, preencha seu e-mail
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="d-block">
+                  <%= f.label :password, 'Senha', class: "control-label" %>
+                  <%= f.password_field :password, "tabindex" => "2", class: "form-control", required: true %>
+                  <div class="float-right">
+                    <%= link_to "Esqueceu a senha?", new_password_path(resource_name), class: "text-small" %>
+                  </div>
+                </div>
+                <div class="invalid-feedback">
+                Por favor, preencha sua senha
+                </div>
+              </div>
+
+              <% if devise_mapping.rememberable? %>
+                <div class="form-group">
+                  <div class="custom-control custom-checkbox">
+                    <%= f.check_box :remember_me, "tabindex" => "3", class: "custom-control-input" %>
+                    <%= f.label :remember_me, 'Lembrar-se', class: 'custom-control-label' %>
+                  </div>
+                </div>
+              <% end %>
+
+              <div class="form-group">
+                <%= f.submit "Login", "tabindex" => "4", class: "btn btn-primary btn-lg btn-block" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="mt-5 text-muted text-center">
+          Não tem uma conta? <%= link_to "Registre-se", new_user_registration_path %>
+        </div>
+        <div class="simple-footer">
+          Copyright &copy; Stisla 2018
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
