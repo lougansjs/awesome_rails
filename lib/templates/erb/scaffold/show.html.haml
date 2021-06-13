@@ -1,0 +1,39 @@
+%section.section
+  .section-header.d-mobile-none
+    %h1= plural_table_name.titleize
+    .section-header-breadcrumb
+      .breadcrumb-item %= link_to 'Dashboard', root_path %&gt;
+      .breadcrumb-item
+        \%= link_to '%= plural_table_name.titleize %&gt;', #{plural_table_name}_path %&gt;
+      .breadcrumb-item
+        Show #{singular_table_name.titleize}
+  .section-body
+    .card
+      .card-header
+        %h4
+          Show #{singular_table_name.titleize}
+      .card-body
+        %dl.row
+          - attributes.each do |attribute|
+            %dt.col-sm-3
+              = attribute.human_name
+              \:
+            - if [:date, :datetime].include?(attribute.type)
+              %dd.col-sm-9
+                \%= l(@%= singular_table_name %&gt;.#{attribute.name}) %&gt;
+            - elsif [:time].include?(attribute.type)
+              %dd.col-sm-9
+                \%= l(@%= singular_table_name %&gt;.#{attribute.name}, format: :time) %&gt;
+            - elsif [:float, :decimal].include?(attribute.type)
+              %dd.col-sm-9
+                \%= np(@%= singular_table_name %&gt;.#{attribute.name}) %&gt;
+            - elsif attribute.type == :boolean
+              %dd.col-sm-9
+                \%= t(@%= singular_table_name %&gt;.#{attribute.name}) %&gt;
+            - else
+              %dd.col-sm-9
+                \%= @%= singular_table_name %&gt;.#{attribute.name} %&gt;
+\%= link_to icon('fas fa-edit', 'Edit'), edit_%= singular_table_name %&gt;_path(@#{singular_table_name}), class: 'btn btn btn-icon icon-left btn-warning' %&gt;
+\%= link_to icon('fas fa-arrow-left', 'Back'), %= plural_table_name %&gt;_path, class: 'btn btn-icon icon-left btn-secondary d-mobile-none' %&gt;
+
+\% content_for(:page_title, 'Show %= singular_table_name.titleize %&gt;') %&gt;

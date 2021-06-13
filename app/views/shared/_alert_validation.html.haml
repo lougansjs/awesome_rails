@@ -1,0 +1,10 @@
+/ USE THIS PARTIAL INSIDE FORM IF YOU WANT TO USE SERVER SIDE VALIDATION
+- if resource.errors.present?
+  .alert.alert-danger.alert-dismissible.show.fade
+    .alert-body
+      %button.close{"data-dismiss" => "alert"}
+        %span ×
+      %h5 Please correct the following items and try again:
+      %ul.pl-3
+        - resource.errors.full_messages.each do |error|
+          %li= error

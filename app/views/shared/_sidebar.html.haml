@@ -1,0 +1,17 @@
+.main-sidebar.sidebar-style-2
+  %aside#sidebar-wrapper
+    .sidebar-brand
+      = link_to 'Stisla', root_path
+    .sidebar-brand.sidebar-brand-sm
+      = link_to 'St', root_path
+    %ul.sidebar-menu{"data-controller" => "sidebar"}
+      %li{:class => "#{active_nav_item('home', 'index')}"}
+        = link_to root_path, class: "nav-link" do
+          %i.fas.fa-fire
+          %span Dashboard
+      %li.menu-header Controllers
+      = render 'shared/sidebar_dropdown', title: 'Resources', icon: 'fas fa-file-alt' do
+        /
+          <li class="<#= active_nav_item('customers', crud_actions) #>">
+          <#= link_to 'Customers', customers_path, class: 'nav-link' #>
+          </li>

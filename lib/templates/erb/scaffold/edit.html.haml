@@ -1,0 +1,20 @@
+%section.section
+  .section-header.d-mobile-none
+    %h1= plural_table_name.titleize
+    .section-header-breadcrumb
+      .breadcrumb-item %= link_to 'Dashboard', root_path %&gt;
+      .breadcrumb-item
+        \%= link_to '%= plural_table_name.titleize %&gt;', #{plural_table_name}_path %&gt;
+      .breadcrumb-item
+        Editing #{singular_table_name.titleize}
+  .section-body
+    .card
+      .card-header
+        %h4
+          Editing #{singular_table_name.titleize}
+      .card-body
+        \%= render 'form', %= singular_table_name %&gt;: @#{singular_table_name} %&gt;
+\%= link_to icon('fas fa-eye', 'Show'), @%= singular_table_name %&gt;, class: 'btn btn-icon icon-left btn-info' %&gt;
+\%= link_to icon('fas fa-arrow-left', 'Back'), %= plural_table_name %&gt;_path, class: 'btn btn-icon icon-left btn-secondary d-mobile-none' %&gt;
+
+\% content_for(:page_title, 'Editing %= singular_table_name.titleize %&gt;') %&gt;

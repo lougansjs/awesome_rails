@@ -1,0 +1,22 @@
+\%= form_with(model: %= model_resource_name %&gt;, data: { controller: 'validation' }) do |form| %&gt;
+- attributes.each do |attribute|
+  .form-group
+    - unless attribute.field_type == :check_box
+      \%= form.label :%= attribute.column_name %&gt; %&gt;
+    - if attribute.reference?
+      \%= form.collection_select(:%= attribute.column_name %&gt;, #{attribute.name.camelize}.all, :id, :to_s, {}, { class: 'form-control', data: { controller: 'select' } }) %&gt;
+    - elsif attribute.field_type == :check_box
+      .custom-control.custom-checkbox
+        \%= form.%= attribute.field_type %&gt; :#{attribute.column_name}, class: 'custom-control-input' %&gt;
+        \%= form.label :%= attribute.column_name %&gt;, class: 'custom-control-label' %&gt;
+    - elsif %i(date datetime).include?(attribute.type)
+      \%= form.text_field :%= attribute.column_name %&gt;, value: l(#{model_resource_name}.#{attribute.column_name}), class: 'form-control', data: { controller: '#{attribute.type}' } %&gt;
+    - elsif %i(time).include?(attribute.type)
+      \%= form.text_field :%= attribute.column_name %&gt;, value: l(#{model_resource_name}.#{attribute.column_name}, format: :time), class: 'form-control', data: { controller: 'time' } %&gt;
+    - elsif %i(float decimal).include?(attribute.type)
+      \%= form.number_field :%= attribute.column_name %&gt;, step: :any, class: 'form-control' %&gt;
+    - else
+      \%= form.%= attribute.field_type %&gt; :#{attribute.column_name}, class: 'form-control' %&gt;
+.card-footer.pl-0
+  \%= form.submit class: 'btn btn-success' %&gt;
+\% end %&gt;

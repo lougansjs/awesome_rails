@@ -1,0 +1,61 @@
+%section.section
+  .section-header.d-mobile-none
+    %h1= plural_table_name.titleize
+    .section-header-breadcrumb
+      .breadcrumb-item %= link_to 'Dashboard', root_path %&gt;
+      .breadcrumb-item
+        List of #{plural_table_name.titleize}
+  .section-body
+    .card
+      .card-header
+        %h4
+          List of #{plural_table_name.titleize}
+        .card-header-action
+          \%= link_to icon('fas fa-plus', 'New %= singular_table_name.titleize %&gt;'), new_#{singular_route_name}_path, class: 'btn btn-icon icon-left btn-primary' %&gt;
+          \%= render 'shared/card_dropdown' do %&gt;
+          \%= link_to icon('fas fa-download', 'Export Data'), %= plural_table_name %&gt;_path(format: :csv, q: request.params[:q]), class: 'dropdown-item has-icon' %&gt;
+          \%= link_to icon('fas fa-print', 'Print Page'), 'javascript:window.print()', class: 'dropdown-item has-icon' %&gt;
+          \% end %&gt;
+      .card-body{"data-controller" => "infinite-page"}
+        /
+          <#= search_form_for @search, remote: true, data: { controller: 'turbolinks-form' }, html: { class: 'form-row' } do |f| #>
+          <div class="form-group col-sm-10">
+          <#= f.text_field :name_cont, class: 'form-control m-input m-input--solid', placeholder: 'Name' #>
+          </div>
+          <div class="form-group col-sm-2 text-right">
+          <#= f.button icon('fas fa-search', 'Search'), name: nil, class: 'btn btn-icon icon-left btn-primary' #>
+          </div>
+          <# end #>
+        .table-responsive
+          %table.table.table-striped.table-md
+            %thead
+              %tr
+                - attributes.each do |attribute|
+                  %th %= sort_link_turbo(@search, :%= attribute.name %&gt;) %&gt;
+                %th Actions
+            %tbody{"data-target" => "infinite-page.container"}
+              \% @%= plural_table_name %&gt;.each do |#{singular_table_name}| %&gt;
+              %tr{"data-target" => "infinite-page.item"}
+                - attributes.each do |attribute|
+                  - if [:date, :datetime].include?(attribute.type)
+                    %td
+                      \%= l(%= singular_table_name %&gt;.#{attribute.name}) %&gt;
+                  - elsif [:time].include?(attribute.type)
+                    %td
+                      \%= l(%= singular_table_name %&gt;.#{attribute.name}, format: :time) %&gt;
+                  - elsif [:float, :decimal].include?(attribute.type)
+                    %td
+                      \%= np(%= singular_table_name %&gt;.#{attribute.name}) %&gt;
+                  - elsif attribute.type == :boolean
+                    %td
+                      \%= t(%= singular_table_name %&gt;.#{attribute.name}) %&gt;
+                  - else
+                    %td
+                      \%= %= singular_table_name %&gt;.#{attribute.name} %&gt;
+                %td
+                  \%= link_to icon('fas fa-eye'), %= model_resource_name %&gt;, title: 'Show it', class: 'btn btn-icon btn-sm btn-info mr-1' %&gt;
+                  \%= link_to icon('fas fa-edit'), edit_%= singular_route_name %&gt;_path(#{singular_table_name}), title: 'Edit it', class: 'btn btn-icon btn-sm btn-warning mr-1' %&gt;
+                  \%= link_to icon('fas fa-trash'), %= model_resource_name %&gt;, title: 'Destroy it', class: 'btn btn-icon btn-sm btn-danger', method: :delete, data: { confirm: 'Are you sure?', remote: true } %&gt;
+              \% end %&gt;
+          \%= link_to 'Next page', %= index_helper %&gt;_path(page: @page.next_number, q: request.params[:q]), data: { target: 'infinite-page.more' } unless @page.last? %&gt;
+\% content_for(:page_title, 'List of %= plural_table_name.titleize %&gt;') %&gt;

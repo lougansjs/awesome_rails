@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Index:
+  = @dashboard.index
+
+= link_to 'Edit', edit_dashboard_path(@dashboard)
+\|
+= link_to 'Back', dashboards_path

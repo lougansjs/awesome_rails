@@ -1,0 +1,21 @@
+%h1 Listing dashboards
+
+%table
+  %thead
+    %tr
+      %th Index
+      %th
+      %th
+      %th
+
+  %tbody
+    - @dashboards.each do |dashboard|
+      %tr
+        %td= dashboard.index
+        %td= link_to 'Show', dashboard
+        %td= link_to 'Edit', edit_dashboard_path(dashboard)
+        %td= link_to 'Destroy', dashboard, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Dashboard', new_dashboard_path
