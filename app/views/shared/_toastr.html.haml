@@ -1,0 +1,3 @@
+- flash.each do |type, msg|
+  - if msg.present? && msg.is_a?(String)
+    %div{"data-controller" => "toastr", "data-toastr-message" => msg, "data-toastr-type" => type}

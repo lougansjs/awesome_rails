@@ -1,0 +1,35 @@
+%section.section
+  .container.mt-5
+    .row
+      .col-12.col-sm-8.offset-sm-2.col-md-6.offset-md-3.col-lg-6.offset-lg-3.col-xl-4.offset-xl-4
+        .login-brand
+          = image_tag(asset_path("stisla-fill.svg"), size: 100, alt: "logo", class: "shadow-light rounded-circle")
+        .card.card-primary
+          .card-header
+            %h4 Login
+          .card-body
+            = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'needs-validation'}) do |f|
+              .form-group
+                = f.label :email, 'E-mail'
+                = f.email_field :email, autofocus: true, autocomplete: "email", "tabindex" => "1", class: "form-control", required: true
+                .invalid-feedback
+                  Por favor, preencha seu e-mail
+              .form-group
+                .d-block
+                  = f.label :password, 'Senha', class: "control-label"
+                  = f.password_field :password, "tabindex" => "2", class: "form-control", required: true
+                  .float-right
+                    = link_to "Esqueceu a senha?", new_password_path(resource_name), class: "text-small"
+                .invalid-feedback
+                  Por favor, preencha sua senha
+              - if devise_mapping.rememberable?
+                .form-group
+                  .custom-control.custom-checkbox
+                    = f.check_box :remember_me, "tabindex" => "3", class: "custom-control-input"
+                    = f.label :remember_me, 'Lembrar-se', class: 'custom-control-label'
+              .form-group
+                = f.submit "Login", "tabindex" => "4", class: "btn btn-primary btn-lg btn-block"
+        .mt-5.text-muted.text-center
+          Não tem uma conta? #{link_to "Registre-se", new_user_registration_path}
+        .simple-footer
+          Copyright © Stisla 2018

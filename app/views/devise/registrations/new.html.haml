@@ -1,0 +1,57 @@
+%section.section
+  .container.mt-5
+    .row
+      .col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2.col-lg-8.offset-lg-2.col-xl-8.offset-xl-2
+        .login-brand
+          = image_tag(asset_path("stisla-fill.svg"), size: 100, alt: "logo", class: "shadow-light rounded-circle")
+        .card.card-primary
+          .card-header
+            %h4 Registre-se
+          .card-body
+            = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+              .row
+                .form-group.col-6
+                  = f.label :first_name, 'Nome'
+                  = f.text_field :first_name, autofocus: true, class: 'form-control'
+                .form-group.col-6
+                  = f.label :last_name, 'Sobrenome'
+                  = f.text_field :last_name, class: 'form-control'
+              .form-group
+                = f.label :email, 'E-mail'
+                = f.email_field :email, class: 'form-control'
+                .invalid-feedback
+              .row
+                .form-group.col-6
+                  = f.label :password, 'Senha', class: 'd-block'
+                  = f.password_field :password, class: 'form-control pwstrength', 'data-indicator'=> "pwindicator"
+                  #pwindicator.pwindicator
+                    .bar
+                    .label
+                .form-group.col-6
+                  = f.label :password2, 'Confirmação de Senha', class: 'd-block'
+                  = f.password_field :password2, class: 'form-control'
+              .form-divider
+                Localização
+              .row
+                .form-group.col-6
+                  = f.label :country, 'País'
+                  = f.select :country, ['Brasil'], {}, {:class => "form-control selectric"}
+                .form-group.col-6
+                  = f.label :state, 'Estado'
+                  = f.select :state,                                                                                |
+                    ['Acre', 'Alagoas', 'Amapá', 'Bahia', 'Ceará', 'Espírito Santo', 'Goiás', 'Maranhão',           |
+                    'Mato Grosso', 'Mato Grosso do Sul', 'Minas Gerais', 'Pará', 'Paraíba', 'Paraná', 'Pernambuco', |
+                    'Piauí', 'Rio de Janeiro', 'Rio Grande do Norte', 'Rio Grande do Sul', 'Rondônia', 'Roraima',   |
+                    'Santa Catarina', 'São Paulo', 'Sergipe', 'Tocantins', 'Distrito Federal'],                     |
+                    {}, {:class => "form-control selectric"}                                                        |
+              .row
+                .form-group.col-6
+                  = f.label :city, 'Cidade'
+                  = f.text_field :city, class: 'form-control'
+                .form-group.col-6
+                  = f.label :zipcode, "CEP"
+                  = f.number_field :zipcode, class: "form-control", size: 8
+              .form-group
+                = f.submit "Registrar", class: "btn btn-primary btn-lg btn-block"
+        .simple-footer
+          Copyright © Stisla 2018
