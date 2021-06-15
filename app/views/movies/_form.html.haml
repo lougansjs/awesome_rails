@@ -1,0 +1,68 @@
+.col-lg-12
+  = form_for @movie do |f|
+    - if @movie.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@movie.errors.count, "error")} prohibited this movie from being saved:"
+        %ul
+          - @movie.errors.full_messages.each do |message|
+            %li= message
+    .row
+      .col-lg-4
+        .form-group
+          = f.label :image, 'Imagem'
+          = f.file_field :image, class: 'form-control', onchange: "readURL(this)"
+        .form-group
+          = image_tag "", id: "preview"
+      .col-lg.8
+        .row
+          .col-lg-8
+            .form-group
+              = f.label :title, "Título"
+              = f.text_field :title, class: 'form-control'
+          .col-lg-2
+            .form-group
+              = f.label :duration, "Duração"
+              = f.number_field :duration, class: 'form-control'
+          .col-lg-2
+            .form-group
+              = f.label :year, "Ano de Lançamento"
+              = f.select :year, (1900..2021), {}, class: 'custom-select'
+          .col-lg-12
+            .form-group
+              = f.label :description, "Descrição"
+              = f.text_area :description, class: 'form-control'
+          .col-lg-3
+            .form-group
+              = f.label :genre, "Gênero"
+              = f.select :genre, @genre, {}, class: 'form-control'
+          .col-lg-3
+            .form-group
+              = f.label :created_by, "Criador por"
+              = f.select :created_by, @users, {}, class: 'form-control'
+          .col-lg-3
+            .form-group
+              = f.label :rating, "Classificação Indicativa"
+              = f.text_field :rating, class: 'form-control'
+          .col-lg-3              
+            .form-group
+              = f.label :direct_by, "Dirigido por"
+              = f.text_field :direct_by, class: 'form-control'
+
+      .col-lg-12.text-center.mt-5
+        .actions
+          = link_to 'Voltar', movies_path, class: "btn btn-primary"
+          = f.submit 'Salvar', class: "btn btn-success"
+
+:javascript
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#preview')
+          .attr('src', e.target.result)
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
