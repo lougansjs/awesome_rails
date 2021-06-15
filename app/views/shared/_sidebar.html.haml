@@ -10,8 +10,4 @@
           %i.fas.fa-fire
           %span Dashboard
       %li.menu-header Controllers
-      = render 'shared/sidebar_dropdown', title: 'Resources', icon: 'fas fa-file-alt' do
-        /
-          <li class="<#= active_nav_item('customers', crud_actions) #>">
-          <#= link_to 'Customers', customers_path, class: 'nav-link' #>
-          </li>
+      = render 'shared/sidebar_dropdown', title: 'Resources', icon: 'fas fa-file-alt'

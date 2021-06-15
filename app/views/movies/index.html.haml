@@ -1,0 +1,12 @@
+.container-fluid
+  %h1 Filmes
+  .row.mt-5
+    - @movies.each do |movie|
+      .col-lg-2 
+        .card
+          .card-body.p-0
+            = image_tag(movie.image, class: "img-fluid")
+          .card-footer.text-center
+            = link_to "Ver informações", movie, class: 'btn btn-info'
+  
+  = link_to 'Novo filme', new_movie_path, class: "btn btn-primary"
