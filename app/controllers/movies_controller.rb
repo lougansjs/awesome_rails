@@ -53,6 +53,15 @@ class MoviesController < ApplicationController
     end
   end
 
+  def bad_redirect
+    redirect_to params[:path]
+  end
+
+  def bad_send
+    method = params[:method]
+    @result = Movie.send(method.to_sym)
+  end
+
   private
   # def set_movie
   #   @movie = Movie.find(params[:id])
@@ -68,7 +77,7 @@ class MoviesController < ApplicationController
 
   def movie_params
     params.require(:movie).permit!
-    
+
   end
 
 
