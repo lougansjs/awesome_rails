@@ -53,26 +53,26 @@ class MoviesController < ApplicationController
     end
   end
 
-  # def get_template
-  #   template = params[:id].to_i
+  def get_template
+    template = params[:id].to_i
 
-  #   if template == 1 || template == 2
-  #     render file: "#{Rails.root}/app/assets/templates/index#{template}.html", layout: false
-  #   else
-  #     flash.alert = "Template inválido"
-  #   end
-  # end
-
-  def export
-    movies = Movies.all
-
-    if movies.present?
-      render(text: csv: movies, filename: 'movies.xlsx')
+    if template == 1 || template == 2
+      render file: "#{Rails.root}/app/assets/templates/index#{template}.html", layout: false
     else
-      flash.alert = "Não há registros"
-      redirect_to params[:path]
+      flash.alert = "Template inválido"
     end
   end
+
+  # def export
+  #   movies = Movies.all
+
+  #   if movies.present?
+  #     render(text: csv: movies, filename: 'movies.xlsx')
+  #   else
+  #     flash.alert = "Não há registros"
+  #     redirect_to params[:path]
+  #   end
+  # end
 
   def generate_tempfile
     name = params[:name]
@@ -88,13 +88,7 @@ class MoviesController < ApplicationController
   end
 
   private
-  # def set_movie
-  #   @movie = Movie.find(params[:id])
-  # end
 
-  # def movie_params
-  #   params.require(:movie).permit(:title, :description, :year, :direct_by, :duration, :genre, :created_by, :rating, :image)
-  # end
 
   def set_movie
     @movie = Movie.where("id = '#{params[:id]}'")
