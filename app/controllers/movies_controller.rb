@@ -67,7 +67,7 @@ class MoviesController < ApplicationController
     movies = Movies.all
 
     if movies.present?
-      render(text: csv: movies, filename: 'movies.xlsx')
+      render(text: movies, filename: 'movies.xlsx')
     else
       flash.alert = "Não há registros"
       redirect_to params[:path]
