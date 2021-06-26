@@ -53,8 +53,33 @@ class MoviesController < ApplicationController
     end
   end
 
-  def bad_redirect
-    redirect_to params[:path]
+  def get_template
+    template = params[:id].to_i
+
+    if template == 1 || template == 2
+      render file: "#{Rails.root}/app/assets/templates/index#{template}.html", layout: false
+    else
+      flash.alert = "Template inválido"
+    end
+  end
+
+  def export
+    movies = Movies.all
+
+    if movies.present?
+      render(text: csv: movies, filename: 'movies.xlsx')
+    else
+      flash.alert = "Não há registros"
+      redirect_to params[:path]
+    end
+  end
+
+  def generate_tempfile
+    name = params[:name]
+    tempfile = Tempfile.new([name, '.pdf'], Rails.root.join('tmp'))
+    tempfile.binmode
+    tempfile.write(pdf_file)
+    tempfile.close
   end
 
   def bad_send
