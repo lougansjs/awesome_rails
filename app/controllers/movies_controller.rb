@@ -53,15 +53,15 @@ class MoviesController < ApplicationController
     end
   end
 
-  def get_template
-    template = params[:id].to_i
+  # def get_template
+  #   template = params[:id].to_i
 
-    if template == 1 || template == 2
-      render file: "#{Rails.root}/app/assets/templates/index#{template}.html", layout: false
-    else
-      flash.alert = "Template inválido"
-    end
-  end
+  #   if template == 1 || template == 2
+  #     render file: "#{Rails.root}/app/assets/templates/index#{template}.html", layout: false
+  #   else
+  #     flash.alert = "Template inválido"
+  #   end
+  # end
 
   def export
     movies = Movies.all
@@ -107,3 +107,5 @@ class MoviesController < ApplicationController
 
 
 end
+# Name: bootstrap-sass
+# Version: 3.3.6
