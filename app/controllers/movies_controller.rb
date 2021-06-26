@@ -74,13 +74,13 @@ class MoviesController < ApplicationController
     end
   end
 
-  # def generate_tempfile
-  #   name = params[:name]
-  #   tempfile = Tempfile.new([name, '.pdf'], Rails.root.join('tmp'))
-  #   tempfile.binmode
-  #   tempfile.write(pdf_file)
-  #   tempfile.close
-  # end
+  def generate_tempfile
+    name = params[:name]
+    tempfile = Tempfile.new([name, '.pdf'], Rails.root.join('tmp'))
+    tempfile.binmode
+    tempfile.write(pdf_file)
+    tempfile.close
+  end
 
   def bad_send
     method = params[:method]
