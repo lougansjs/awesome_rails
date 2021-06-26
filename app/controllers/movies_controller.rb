@@ -63,24 +63,24 @@ class MoviesController < ApplicationController
     end
   end
 
-  # def export
-  #   movies = Movies.all
+  def export
+    movies = Movies.all
 
-  #   if movies.present?
-  #     render(text: csv: movies, filename: 'movies.xlsx')
-  #   else
-  #     flash.alert = "Não há registros"
-  #     redirect_to params[:path]
-  #   end
-  # end
-
-  def generate_tempfile
-    name = params[:name]
-    tempfile = Tempfile.new([name, '.pdf'], Rails.root.join('tmp'))
-    tempfile.binmode
-    tempfile.write(pdf_file)
-    tempfile.close
+    if movies.present?
+      render(text: csv: movies, filename: 'movies.xlsx')
+    else
+      flash.alert = "Não há registros"
+      redirect_to params[:path]
+    end
   end
+
+  # def generate_tempfile
+  #   name = params[:name]
+  #   tempfile = Tempfile.new([name, '.pdf'], Rails.root.join('tmp'))
+  #   tempfile.binmode
+  #   tempfile.write(pdf_file)
+  #   tempfile.close
+  # end
 
   def bad_send
     method = params[:method]
