@@ -64,10 +64,11 @@ class MoviesController < ApplicationController
   end
 
   def export
-    movies = Movies.all
+    byebug
+    movie = Movies.where(id: params[:id])
 
-    if movies.present?
-      render(text: movies, filename: 'movies.xlsx')
+    if movie.present?
+      render(text: movie, filename: 'movies.xlsx')
     else
       flash.alert = "Não há registros"
       redirect_to params[:path]
@@ -80,6 +81,8 @@ class MoviesController < ApplicationController
     tempfile.binmode
     tempfile.write(pdf_file)
     tempfile.close
+
+    File.open(tempfile.path)
   end
 
   def bad_send
