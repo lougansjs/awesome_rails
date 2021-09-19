@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Este service é responsável por chamar a API de Filmes do TMDB
 class MovieService
   def top_rated_movies
     url = 'https://api.themoviedb.org/3/movie/top_rated?language=pt-BR'
