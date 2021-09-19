@@ -59,4 +59,8 @@ class MoviesController < ApplicationController
   def movie_params
     params.require(:movie).permit(:title, :description, :year, :direct_by, :duration, :genre, :created_by, :rating, :image)
   end
+
+  def movie_service
+    @movie_service ||= MovieService.new
+  end
 end
