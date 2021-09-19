@@ -29,6 +29,9 @@ gem 'haml-rails'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+# [HTTP]
+gem 'rest-client'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
