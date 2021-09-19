@@ -39,7 +39,6 @@ class MoviesController < ApplicationController
   end
 
   def update
-    byebug
     @movie.update!(movie_params)
     respond_to do |format|
       format.html { redirect_to @movie, notice: 'Movie was successfully updated.' }
@@ -56,10 +55,6 @@ class MoviesController < ApplicationController
   end
 
   private
-
-  def set_movie
-    @movie = Movie.find(params[:id])
-  end
 
   def movie_params
     params.require(:movie).permit(:title, :description, :year, :direct_by, :duration, :genre, :created_by, :rating, :image)
