@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class MoviesController < ApplicationController
-  before_action :set_movie, only: %i[ show edit update destroy ]
+  before_action :set_movie, only: %i[show edit update destroy]
   before_action :authenticate_user!
 
   def index
@@ -54,11 +56,12 @@ class MoviesController < ApplicationController
   end
 
   private
-    def set_movie
-      @movie = Movie.find(params[:id])
-    end
 
-    def movie_params
-      params.require(:movie).permit(:title, :description, :year, :direct_by, :duration, :genre, :created_by, :rating, :image)
-    end
+  def set_movie
+    @movie = Movie.find(params[:id])
+  end
+
+  def movie_params
+    params.require(:movie).permit(:title, :description, :year, :direct_by, :duration, :genre, :created_by, :rating, :image)
+  end
 end

@@ -1,0 +1,17 @@
+detectors:
+  IrresponsibleModule:
+    enabled: false
+  UnusedPrivateMethod:
+    enabled: true
+  TooManyStatements:
+    enabled: true
+    max_statements: 15
+    exclude:
+      - initialize
+
+exclude_paths:
+  - public
+  - vendor
+  - tmp
+  - log
+  - doc
