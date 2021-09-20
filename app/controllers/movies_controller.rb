@@ -5,10 +5,10 @@ class MoviesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @search = Movie.reverse_chronologically.ransack(params[:q])
+    @movies = movie_service.most_popular_movies['results']
 
     respond_to do |format|
-      format.any(:html, :json) { @movies = set_page_and_extract_portion_from @search.result }
+      format.any(:html, :json) { @movies }
       format.csv { render csv: @search.result }
     end
   end
@@ -62,5 +62,9 @@ class MoviesController < ApplicationController
 
   def movie_params
     params.require(:movie).permit(:title, :description, :year, :direct_by, :duration, :genre, :created_by, :rating, :image)
+  end
+
+  def movie_service
+    MovieService.new
   end
 end

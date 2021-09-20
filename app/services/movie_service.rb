@@ -2,9 +2,25 @@
 
 # Este service e responsável por chamar a API de Filmes do TMDB
 class MovieService
+  def initialize(page = 1)
+    @page = page
+    @path = Rails.application.credentials[Rails.env.to_sym][:api_tmdb_url]
+    @token = Rails.application.credentials[Rails.env.to_sym][:token_tmdb]
+  end
+
   def top_rated_movies
-    url = 'https://api.themoviedb.org/3/movie/top_rated?language=pt-BR'
-    headers = { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNjk4MDI2NTc0ODlkZWQwYjU5ZTM4MTA0ZGE3YzhiMSIsInN1YiI6IjYxNDc4M2NlZTU1OTM3MDA0MzE5NjgyMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8eoAD1p0UU_3MPGQI4wjfFjTZHYwgX0R8HmYU3URKHI' }
-    RestClient.get(url, headers)
+    url = "#{@path}/movie/top_rated?language=pt-BR"
+    headers = { 'Authorization': @token }
+
+    response = RestClient.get(url, headers)
+    JSON.parse(response)
+  end
+
+  def most_popular_movies
+    url = "#{@path}/movie/popular?language=pt-BR"
+    headers = { 'Authorization': @token }
+
+    response = RestClient.get(url, headers)
+    JSON.parse(response)
   end
 end
