@@ -30,3 +30,20 @@
   background: #dad7d7;
   border-radius: 5px;
 }
+
+.btn-drop {
+  border-radius: 50%;
+  width: 30px;
+  padding: 0;
+  height: 30px;
+  margin: 7px;
+  background-color: #fff;
+}
+
+.drop-option:hover {
+  background-color: #adccf5;
+}
+
+.drop-option .dropdown-item:hover {
+  background: none !important;
+}
