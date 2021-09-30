@@ -8,6 +8,7 @@ class MovieService
     @token = Rails.application.credentials[Rails.env.to_sym][:token_tmdb]
   end
 
+  # Filmes mais votados
   def top_rated_movies
     url = "#{@path}/movie/top_rated?language=pt-BR"
     headers = { 'Authorization': @token }
