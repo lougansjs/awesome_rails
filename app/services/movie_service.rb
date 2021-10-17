@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Este service e responsável por chamar a API de Filmes do TMDB
+# Este service e responsavel por chamar a API de Filmes do TMDB
 class MovieService
   def initialize(page = 1)
     @page = page

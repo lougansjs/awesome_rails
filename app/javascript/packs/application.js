@@ -4,6 +4,7 @@
 // that code so it'll be compiled.
 
 // Core libraries
+window.ApexCharts = require("apexcharts")
 require("turbolinks").start()
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
