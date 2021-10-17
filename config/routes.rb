@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  get 'graphics/index'
   resources :movies
   get 'dashboards/index'
   devise_for :users

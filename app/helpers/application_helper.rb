@@ -3,6 +3,10 @@ module ApplicationHelper
     content_for(:page_title) || Rails.application.class.to_s.split('::').first
   end
 
+  def skip_weekends(array_dates)
+    array_dates.reject { |date| date.to_date.saturday? || date.to_date.sunday? }
+  end
+
   def crud_actions
     %w( index show new edit create update )
   end

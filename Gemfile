@@ -29,6 +29,10 @@ gem 'haml-rails'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+# [Graphics]
+gem 'apexcharts'
+gem 'groupdate'
+
 # [HTTP]
 gem 'rest-client'
 
