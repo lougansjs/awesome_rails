@@ -10,8 +10,8 @@ class ArtiaService
 
   def initialize
     @url = URI('https://app.artia.com/graphql')
-    @client_id = 'de2d5d48c6a78a35766bf1ba443414419213c6efe42b77c1030ae401a470c967'
-    @secret = 'a2e44a4272f3a54b5b8a62da901188f6f2d1cc99cc8d6ada260a5fc9de3c5578'
+    @client_id = Rails.application.credentials[Rails.env.to_sym][:client_id_artia]
+    @secret = Rails.application.credentials[Rails.env.to_sym][:secret_artia]
     @token = request_token
   end
 
