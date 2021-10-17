@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  get 'graphics/index'
+  resources :burndowns
   resources :movies
   get 'dashboards/index'
   devise_for :users
