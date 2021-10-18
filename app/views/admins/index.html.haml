@@ -1,2 +1,19 @@
-%h1 Admins#index
-%p Find me in app/views/admins/index.html.haml
+.container-fluid.p-0
+  %section.section
+    .section-header
+      %h1 Administração
+    .section-body
+      %h2.section-title Ferramentas
+      %p.section-lead
+        As opções abaixo te permitem alterar parametros fundamentais do app. Use com cuidado!
+      .row
+        .col-lg-6.col-12
+          .card.card-large-icons
+            .card-icon.bg-primary.text-white
+              %i.fas.fa-cog
+            .card-body
+              %h4 General
+              %p General settings such as, site title, site description, address and so on.
+              %a.card-cta{:href => "features-setting-detail.html"}
+                Change Setting
+                %i.fas.fa-chevron-right
