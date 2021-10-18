@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Movies Controller
 class MoviesController < ApplicationController
   before_action :set_movie, only: %i[show edit update destroy]
   before_action :authenticate_user!
