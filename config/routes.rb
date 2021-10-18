@@ -3,6 +3,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :admins
   resources :burndowns
   resources :movies
   get 'dashboards/index'
