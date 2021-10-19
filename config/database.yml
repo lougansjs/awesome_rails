@@ -82,7 +82,7 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
+  # <<: *default
   url: <%= ENV['DATABASE_URL'] %>
   # database: awesome_rails_production
   # username: awesome_rails
