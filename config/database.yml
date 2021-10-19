@@ -83,6 +83,7 @@ test:
 #
 production:
   <<: *default
-  database: awesome_rails_production
-  username: awesome_rails
-  password: <%= ENV['AWESOME_RAILS_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
+  # database: awesome_rails_production
+  # username: awesome_rails
+  # password: <%= ENV['AWESOME_RAILS_DATABASE_PASSWORD'] %>
