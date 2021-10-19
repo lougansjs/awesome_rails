@@ -1,2 +1,9 @@
-%h1 Burndown
-= line_chart(@series, @options)
+.container-fluid.p-0
+  %section.section
+    .section-header
+      %h1 Burndown
+    .section-body
+      %h2.section-title Sprint #{@burndown.sprint}
+      .row
+        .col-lg-12.col-12
+          = line_chart(@series, @options)
