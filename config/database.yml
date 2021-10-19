@@ -19,10 +19,10 @@ default: &default
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
-  username: <%= ENV.fetch('POSTGRES_USER') %>
-  password: <%= ENV.fetch('POSTGRES_PASSWORD') %>
-  host: <%= ENV.fetch('POSTGRES_HOST') %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV.fetch("POSTGRES_USER") %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
+  host: <%= ENV.fetch("POSTGRES_HOST") %>
 
 development:
   <<: *default
@@ -82,8 +82,7 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  # <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
-  # database: awesome_rails_production
-  # username: awesome_rails
-  # password: <%= ENV['AWESOME_RAILS_DATABASE_PASSWORD'] %>
+  host: <%= Rails.application.credentials[Rails.env.to_sym][:host] %>
+  database: <%= Rails.application.credentials[Rails.env.to_sym][:database] %>
+  username: <%= Rails.application.credentials[Rails.env.to_sym][:username] %>
+  password: <%= Rails.application.credentials[Rails.env.to_sym][:password] %>
