@@ -7,8 +7,6 @@ services:
     ports:
       - "6379:6379"
 
-
-
   data_redis:
     image: cogniteev/echo
     command: echo 'Data Container for Redis'
@@ -29,11 +27,13 @@ services:
     volumes:
       - .:/opt/app
     environment:
+      - REDIS_URL=redis://redis:6379/0
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_HOST=db
     depends_on:
       - db
+      - redis
   db:
     image: postgres:12-alpine
     environment:
