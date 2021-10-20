@@ -26,7 +26,7 @@ class Burndown < ApplicationRecord
 
   def executed_by_day(counts)
     score = {}
-    counts = counts.unshift(0)
+    # counts = counts.unshift(0)
     days = sprint_days
     days.each_with_index do |day, idx1|
       counts.each_with_index do |count, idx2|

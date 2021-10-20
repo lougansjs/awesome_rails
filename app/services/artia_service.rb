@@ -58,7 +58,7 @@ class ArtiaService
 
   def count_activities(dates)
     list = []
-    dates = dates.reject(&:today?)
+    dates = dates
     concluded = concluded_activities.select { |activity| activity['actualEnd'].to_date.between?(dates.first, dates.last) }
     dates.each do |_date|
       list << concluded.select { |activity| activity['actualEnd'].to_date == _date }.count
