@@ -17,6 +17,9 @@ module AwesomeRails
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
+    Time::DATE_FORMATS[:default] = '%d/%m/%Y %H:%M'
+    Date::DATE_FORMATS[:default] = '%d/%m/%Y'
+
     config.active_job.queue_adapter = :sidekiq
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

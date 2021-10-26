@@ -12,12 +12,13 @@ require("channels")
 
 // jQuery (as a read only property so browser extensions can't clobber it)
 const jquery = require("jquery")
-const descriptor = { value: jquery, writable: false, configurable: false }
+const descriptor = { value: jquery, writable: true, configurable: true }
 Object.defineProperties(window, { $: descriptor, jQuery: descriptor })
 
 // App libraries
 require("bootstrap")
 require("jquery.nicescroll")
+require("summernote")
 
 require("select2")
 require("cleave.js")
