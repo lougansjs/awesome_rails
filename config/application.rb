@@ -17,7 +17,7 @@ module AwesomeRails
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
-    Time::DATE_FORMATS[:default] = '%d/%m/%Y %H:%M'
+    # Time::DATE_FORMATS[:default] = '%d/%m/%Y %H:%M'
     Time::DATE_FORMATS[:db] = '%Y-%m-%d %H:%M'
     Date::DATE_FORMATS[:default] = '%d/%m/%Y'
 
