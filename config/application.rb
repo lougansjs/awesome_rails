@@ -18,6 +18,7 @@ module AwesomeRails
     config.load_defaults 6.0
 
     Time::DATE_FORMATS[:default] = '%d/%m/%Y %H:%M'
+    Time::DATE_FORMATS[:db] = '%Y-%m-%d %H:%M'
     Date::DATE_FORMATS[:default] = '%d/%m/%Y'
 
     config.active_job.queue_adapter = :sidekiq
