@@ -1,0 +1,53 @@
+.col-lg-12.col-12
+  = form_for @burndown do |f|  
+    .row
+      .col-lg-12
+        .row
+          .col-lg-2
+            .form-group
+              = f.label :date_start, "Data de Início"
+              = f.date_field :date_start, class: 'form-control', required: true
+          .col-lg-2
+            .form-group
+              = f.label :date_end, "Data de Término"
+              = f.date_field :date_end, class: 'form-control', required: true
+          .col-lg-1
+            .form-group
+              = f.label :metascore, "Meta"
+              = f.number_field :metascore, class: 'form-control metascore', required: true
+          .col-lg-1
+            .form-group
+              = f.label :sprint, "Sprint"
+              = f.number_field :sprint, class: 'form-control sprint', required: true
+          .col-lg-3
+            .actions
+              = f.submit 'Salvar', class: "btn btn-success"
+      
+      .col-lg-6
+        - if @burndown.errors.any?
+          .alert.alert-danger.alert-dismissible.show.fade
+            %button.close{'data-dismiss': 'alert'}
+              %span x
+            - @burndown.errors.full_messages.each do |message|
+              %p= message
+
+  = render 'burndowns_list'
+
+:javascript
+  $(function() {
+    $('.sprint').keypress(function(){
+      var sprint = $(this).val().length
+      if (sprint > 1) {
+        return false 
+      }
+    })
+  })
+
+  $(function() {
+    $('.metascore').keypress(function(){
+      var metascore = $(this).val().length
+      if (metascore > 2) {
+        return false 
+      }
+    })
+  })

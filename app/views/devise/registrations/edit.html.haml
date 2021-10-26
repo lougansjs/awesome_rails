@@ -1,36 +1,60 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    %div
-      Currently waiting confirmation for: #{resource.unconfirmed_email}
-  .field
-    = f.label :password
-    %i (leave blank if you don't want to change it)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-    - if @minimum_password_length
-      %br/
-      %em
-        = @minimum_password_length
-        characters minimum
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .field
-    = f.label :current_password
-    %i (we need your current password to confirm your changes)
-    %br/
-    = f.password_field :current_password, autocomplete: "current-password"
-  .actions
-    = f.submit "Update"
-%h3 Cancel my account
-%p
-  Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
-= link_to "Back", :back
+.container-fluid.p-0
+  %section.section
+    .section-header
+      %h1 Perfil do Usuário
+    .section-body
+      %h2.section-title Olá, #{current_user.first_name}
+      %p.section-lead
+        Mude suas informações de perfil nessa página.
+
+      .row.mt-sm-4
+        .col-12.col-md-12.col-lg-5
+          .card.profile-widget
+            .profile-widget-header
+              %img.rounded-circle.profile-widget-picture{:alt => "image", :src => "https://demo.getstisla.com/assets/img/avatar/avatar-1.png"}/
+              .profile-widget-items
+                .profile-widget-item
+                  .profile-widget-item-label Atividades
+                  .profile-widget-item-value -
+                .profile-widget-item
+                  .profile-widget-item-label Pull Requests
+                  .profile-widget-item-value -
+                .profile-widget-item
+                  .profile-widget-item-label Times
+                  .profile-widget-item-value -
+            .profile-widget-description
+              .profile-widget-name
+                = current_user.full_name
+                .text-muted.d-inline.font-weight-normal
+                  .slash
+                  N2 Agent
+              = @lerolero
+        .col-12.col-md-12.col-lg-7
+          .card
+            = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+              .card-header
+                %h4 Editar perfil
+              .card-body
+                .row
+                  .form-group.col-md-6.col-12
+                    = f.label :first_name, 'Nome'
+                    = f.text_field :first_name, autofocus: true, class: 'form-control'
+                    .invalid-feedback
+                      Please fill in the first name
+                  .form-group.col-md-6.col-12
+                    = f.label :last_name, 'Sobrenome'
+                    = f.text_field :last_name, autofocus: true, class: 'form-control'
+                    .invalid-feedback
+                      Please fill in the last name
+                .row
+                  .form-group.col-md-7.col-12
+                    = f.label :email, 'E-mail'
+                    = f.email_field :email, class: 'form-control'
+                    .invalid-feedback
+                      Please fill in the email
+                  .form-group.col-md-5.col-12
+                    = f.label :city, 'Cidade'
+                    = f.text_field :city, class: 'form-control'
+
+              .card-footer.text-right
+                %button.btn.btn-primary Save Changes
