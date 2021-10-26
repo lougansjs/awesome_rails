@@ -40,21 +40,21 @@
                     = f.label :first_name, 'Nome'
                     = f.text_field :first_name, autofocus: true, class: 'form-control'
                     .invalid-feedback
-                      Please fill in the first name
+                      Por favor, preencha seu nome
                   .form-group.col-md-6.col-12
                     = f.label :last_name, 'Sobrenome'
                     = f.text_field :last_name, autofocus: true, class: 'form-control'
                     .invalid-feedback
-                      Please fill in the last name
+                      Por favor, preencha seu sobrenome
                 .row
                   .form-group.col-md-7.col-12
                     = f.label :email, 'E-mail'
                     = f.email_field :email, class: 'form-control'
                     .invalid-feedback
-                      Please fill in the email
+                      Por favor, preencha o e-mail
                   .form-group.col-md-5.col-12
                     = f.label :city, 'Cidade'
                     = f.text_field :city, class: 'form-control'
 
               .card-footer.text-right
-                %button.btn.btn-primary Save Changes
+                %button.btn.btn-primary Salvar mudanças

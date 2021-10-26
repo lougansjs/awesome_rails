@@ -161,15 +161,15 @@
           = current_user.full_name
       .dropdown-menu.dropdown-menu-right
         .dropdown-title Logged in 5 min ago
-        %a.dropdown-item.has-icon{:href => "users/edit"}
+        %a.dropdown-item.has-icon{:href => "/users/edit"}
           %i.far.fa-user
           Perfil
-        %a.dropdown-item.has-icon{:href => "features-activities.html"}
+        %a.dropdown-item.has-icon{:href => "#"}
           %i.fas.fa-bolt
-          Activities
-        %a.dropdown-item.has-icon{:href => "features-settings.html"}
+          Atividades
+        %a.dropdown-item.has-icon{:href => "#"}
           %i.fas.fa-cog
-          Settings
+          Configurações
         .dropdown-divider
         = link_to destroy_user_session_path, method: :delete, class: "dropdown-item has-icon text-danger" do
           %i.fas.fa-sign-out-alt
