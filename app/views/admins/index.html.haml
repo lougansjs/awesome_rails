@@ -12,8 +12,6 @@
             .card-icon.bg-primary.text-white
               %i.fas.fa-cog
             .card-body
-              %h4 General
-              %p General settings such as, site title, site description, address and so on.
-              %a.card-cta{:href => "features-setting-detail.html"}
-                Change Setting
-                %i.fas.fa-chevron-right
+              %h4 Permissões
+              %p Altere permissões de acesso para os usuários
+              = link_to "Configurar <i class='fas fa-chevron-right'></i>".html_safe, permissions_path, class: 'card-cta'

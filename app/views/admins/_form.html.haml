@@ -1,0 +1,32 @@
+= form_for(user, :url => permissions_path, :method => :put, :html => {:class => ""}) do |f|
+  = f.hidden_field :user_id, value: user.id
+  .media-links
+    %a.save_permissions{class: 'text-success'} Salvar
+    .bullet
+    %a.edit_permissions{href: "#collapseExample_#{user.id}",'data-toggle': 'collapse', 'aria-expanded': 'false', role: 'button' ,'aria-controls': "collapseExample_#{user.id}"} Editar
+    .bullet
+    = link_to 'Apagar', registration_path(user), method: :delete, confirm: 'Tem certeza que deseja excluir este usuário?', class: 'text-danger'
+
+  .media-links.form-inline{:class => 'collapse', 'id': "collapseExample_#{user.id}"}
+    .form-group
+      = check_box_tag "role_permission", 'admin', false, :class => "form-check-input", id: "role_admin_#{user.id}", checked: user.admin?
+      %label.form-check-label{:for => "role_permission"} Administrador
+    .form-group.ml-2
+      = check_box_tag "role_permission", 'observer', false, :class => "form-check-input", id: "role_observer_#{user.id}", checked: user.observer?
+      %label.form-check-label{:for => "role_permission"} Colaborador
+
+:javascript
+  $(document).ready(function(){
+    $('.save_permissions').click(function(){
+      $(this).closest('form').submit();
+    })
+
+    $('.form-check-input').click(function(){
+      var item = $(this).val();
+      if (item == 'admin') {
+        $('#role_observer_'+$(this).attr('id').split('_')[2]).prop('checked', false);
+      } else {
+        $('#role_admin_'+$(this).attr('id').split('_')[2]).prop('checked', false);
+      }
+    })
+  });

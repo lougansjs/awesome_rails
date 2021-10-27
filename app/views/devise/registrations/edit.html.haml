@@ -1,3 +1,4 @@
+- photo = current_user.photo.attachment.nil? ? "https://demo.getstisla.com/assets/img/avatar/avatar-1.png" : current_user.photo
 .container-fluid.p-0
   %section.section
     .section-header
@@ -10,8 +11,8 @@
       .row.mt-sm-4
         .col-12.col-md-12.col-lg-5
           .card.profile-widget
-            .profile-widget-header
-              %img.rounded-circle.profile-widget-picture{:alt => "image", :src => "https://demo.getstisla.com/assets/img/avatar/avatar-1.png"}/
+            .profile-widget-header.custom-file
+              = image_tag photo, :class => "rounded-circle profile-widget-picture"
               .profile-widget-items
                 .profile-widget-item
                   .profile-widget-item-label Atividades
@@ -36,6 +37,10 @@
                 %h4 Editar perfil
               .card-body
                 .row
+                  .form-group.col-lg-12 
+                    .custom-file
+                      = f.file_field :photo, class: "custom-file-input", id: "customFile"
+                      = f.label :photo, "Foto de perfil", class: "custom-file-label"
                   .form-group.col-md-6.col-12
                     = f.label :first_name, 'Nome'
                     = f.text_field :first_name, autofocus: true, class: 'form-control'

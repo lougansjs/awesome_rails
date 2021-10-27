@@ -16,10 +16,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def destroy
+    @user = User.find(current_user.id)
+    redirect_to permissions_path
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:email, :first_name, :last_name, :city, :state, :zip, :country)
+    params.require(:user).permit(:email, :first_name, :last_name, :city, :state, :zip, :country, :photo)
   end
 
   def utils_service
