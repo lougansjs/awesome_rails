@@ -1,3 +1,4 @@
+- photo = current_user.photo.attachment.nil? ? "https://demo.getstisla.com/assets/img/avatar/avatar-1.png" : current_user.photo
 %nav.navbar.navbar-expand-lg.main-navbar
   %form.form-inline.mr-auto
     %ul.navbar-nav.mr-3
@@ -156,7 +157,7 @@
             %i.fas.fa-chevron-right
     %li.dropdown
       %a.nav-link.dropdown-toggle.nav-link-lg.nav-link-user{"data-toggle" => "dropdown", :href => "#"}
-        = image_tag(current_user.photo, class: 'rounded-circle mr-1')
+        = image_tag(photo, class: 'rounded-circle mr-1')
         .d-sm-none.d-lg-inline-block
           = current_user.full_name
       .dropdown-menu.dropdown-menu-right
