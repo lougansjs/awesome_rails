@@ -6,6 +6,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @lerolero = utils_service.lerolero
   end
 
+  def create
+    byebug
+    super
+  end
+
   def update
     @user = User.find(current_user.id)
     if @user.update(user_params)

@@ -9,7 +9,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   before_save :set_role
-  validate :verify_rules
 
   def set_role
     self.role_name = 'observer' if role_name.blank?
@@ -25,9 +24,5 @@ class User < ApplicationRecord
 
   def observer?
     role_name == 'observer'
-  end
-
-  def verify_rules
-    errors.add('Permissão', 'deve preencher uma permissão') if role_name.blank?
   end
 end
