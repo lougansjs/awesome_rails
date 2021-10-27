@@ -1,9 +1,17 @@
 %li.nav-item.dropdown.active
   %a.nav-link.has-dropdown{"data-toggle" => "dropdown", :href => "#"}
     %i{:class => icon}
-    %span= title
+    %span= 'Burndown'
   %ul.dropdown-menu
     %li
       = link_to 'Criar Burndows', new_burndown_path
     %li
       = link_to 'Gráfico', burndowns_path
+
+%li.nav-item.dropdown.active
+  %a.nav-link.has-dropdown{"data-toggle" => "dropdown", :href => "#"}
+    %i{:class => icon}
+    %span= 'Administração'
+  %ul.dropdown-menu
+    %li
+      = link_to 'Geral', admins_path
