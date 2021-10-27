@@ -4,7 +4,8 @@
 class BurndownsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @burndown = Burndown.where("'#{Date.today}' between date_start AND date_end").first
+    date_current = Date.current.strftime('%Y-%m-%d')
+    @burndown = Burndown.where("'#{date_current}' between date_start AND date_end").first
     planned = @burndown.planned_by_day
     activities = artia_svc.count_activities(@burndown.mapping_passed_days)
     executed = @burndown.executed_by_day(activities)
