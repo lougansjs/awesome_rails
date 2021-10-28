@@ -7,6 +7,7 @@
         %th{:scope => "col"} Data de Término
         %th{:scope => "col"} Meta
         %th{:scope => "col"} Sprint
+        %th{:scope => "col"} Situação
         %th{:scope => "col"} Data de criação
         %th{:scope => "col", :width => "120"}
     %tbody
@@ -17,7 +18,13 @@
           %td= burndown.date_end
           %td= burndown.metascore
           %td= burndown.sprint
+          %td
+            .badge{class: "badge-#{burndown.status_class}"}= burndown.status_name
           %td= burndown.created_at
           %td
             = link_to 'Editar', edit_burndown_path(burndown), class: 'btn btn-primary'
-            = link_to 'Excluir', burndown, method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' }, class: 'btn btn-danger'
+            - if burndown.burndown_in_use?
+              %a.btn.btn-secondary Excluir
+            - else
+              = link_to 'Excluir', burndown, method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' }, class: 'btn btn-danger'
+              

@@ -31,6 +31,7 @@ gem 'haml-rails'
 
 gem 'aws-sdk-s3'
 gem 'lerolero_generator'
+gem 'sidekiq-scheduler'
 gem 'stisla-rails'
 
 # [Graphics]

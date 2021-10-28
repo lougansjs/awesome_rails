@@ -32,8 +32,13 @@ class BurndownsController < ApplicationController
 
   def destroy
     @burndown = Burndown.find(params[:id])
-    @burndown.destroy
-    redirect_to new_burndown_path
+    if @burndown.burndown_in_use?
+      flash[:alert] = "Burndown##{@burndown.sprint} está em uso"
+      redirect_to new_burndown_path
+    else
+      @burndown.destroy
+      redirect_to new_burndown_path
+    end
   end
 
   def burndown_params

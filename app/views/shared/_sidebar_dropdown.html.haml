@@ -1,4 +1,4 @@
-%li.nav-item.dropdown.active
+%li.nav-item.dropdown
   %a.nav-link.has-dropdown{"data-toggle" => "dropdown", :href => "#"}
     %i{:class => icon}
     %span= 'Burndown'
@@ -9,7 +9,7 @@
       = link_to 'Gráfico', burndowns_path
 
 - if current_user.admin?
-  %li.nav-item.dropdown.active
+  %li.nav-item.dropdown
     %a.nav-link.has-dropdown{"data-toggle" => "dropdown", :href => "#"}
       %i{:class => icon}
       %span= 'Administração'

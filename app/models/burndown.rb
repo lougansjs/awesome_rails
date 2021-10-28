@@ -4,8 +4,44 @@
 class Burndown < ApplicationRecord
   include BurndownsHelper
 
+  PENDING = 0
+  IN_PROGRESS = 1
+  FINISHED = 2
+
+  STATUS = {
+    pending: PENDING,
+    in_progress: IN_PROGRESS,
+    finished: FINISHED
+  }.freeze
+
   validates :date_start, :date_end, :metascore, :sprint, presence: true
-  validate :verify_rules
+  before_create :verify_rules
+
+  def start_burndown!
+    self.status = STATUS[:in_progress]
+    self.in_use = true
+  end
+
+  def finish_burndown!
+    self.status = STATUS[:finished]
+    self.in_use = false
+  end
+
+  def status_name
+    return 'Pronta para iniciar' if status == STATUS[:pending]
+    return 'Em andamento' if status == STATUS[:in_progress]
+    return 'Finalizada' if status == STATUS[:finished]
+  end
+
+  def status_class
+    return 'danger' if status == STATUS[:pending]
+    return 'warning' if status == STATUS[:in_progress]
+    return 'success' if status == STATUS[:finished]
+  end
+
+  def burndown_in_use?
+    in_use
+  end
 
   def sprint_days
     skip_weekends((date_start..date_end))

@@ -11,31 +11,32 @@
             .card-header
               %h4 Administradores
             .card-body
-              10
-      .col-lg-3.col-md-6.col-sm-6.col-12
-        .card.card-statistic-1
-          .card-icon.bg-danger
-            %i.far.fa-newspaper
-          .card-wrap
-            .card-header
-              %h4 Notícias
-            .card-body
-              42
-      .col-lg-3.col-md-6.col-sm-6.col-12
-        .card.card-statistic-1
-          .card-icon.bg-warning
-            %i.far.fa-file
-          .card-wrap
-            .card-header
-              %h4 Relatórios
-            .card-body
-              1,201
-      .col-lg-3.col-md-6.col-sm-6.col-12
-        .card.card-statistic-1
-          .card-icon.bg-success
-            %i.fas.fa-circle
-          .card-wrap
-            .card-header
-              %h4 Usuários Online
-            .card-body
-              47
+              = @admins
+      - if current_user.admin?
+        .col-lg-3.col-md-6.col-sm-6.col-12
+          .card.card-statistic-1
+            .card-icon.bg-danger
+              %i.far.fa-newspaper
+            .card-wrap
+              .card-header
+                %h4 Notícias
+              .card-body
+                42
+        .col-lg-3.col-md-6.col-sm-6.col-12
+          .card.card-statistic-1
+            .card-icon.bg-warning
+              %i.far.fa-file
+            .card-wrap
+              .card-header
+                %h4 Relatórios
+              .card-body
+                1,201
+        .col-lg-3.col-md-6.col-sm-6.col-12
+          .card.card-statistic-1
+            .card-icon.bg-success
+              %i.fas.fa-circle
+            .card-wrap
+              .card-header
+                %h4 Usuários Online
+              .card-body
+                47
