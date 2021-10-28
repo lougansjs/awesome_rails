@@ -1,11 +1,49 @@
-version: '3'
+version: '2'
+
 services:
+
+  rails:
+    build: .
+    command: rails s -b 0.0.0.0
+    container_name: awesome_rails
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/opt/app
+    environment: 
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
+    depends_on:
+      - db
+  db:
+    image: postgres:12-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+
+  
+  postgres:
+    mem_limit: 1Gb
+    image: 'postgres:9.5'
+    volumes_from:
+      - data_database
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: awesome_rails
+      POSTGRES_PASSWORD: awesome_rails
+
   redis:
+    mem_limit: 1Gb
     image: redis:3-alpine
     command: redis-server --appendonly no
     hostname: redis
     ports:
       - "6379:6379"
+    volumes_from:
+      - data_redis
 
   data_redis:
     image: cogniteev/echo
@@ -18,32 +56,3 @@ services:
     command: echo 'Data Container for Postgres'
     volumes:
       - /var/lib/postgresql/data
-  rails:
-    build: .
-    command: rails s -b 0.0.0.0
-    container_name: awesome_rails
-    ports:
-      - 3000:3000
-    volumes:
-      - .:/opt/app
-    environment:
-      - REDIS_URL=redis://redis:6379/0
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_HOST=db
-    depends_on:
-      - db
-      - redis
-  db:
-    image: postgres:12-alpine
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    volumes:
-      - awesome_rails_data:/var/lib/postgresql/data
-volumes:
-  awesome_rails_data:
-
-
-
-

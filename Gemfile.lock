@@ -405,12 +405,13 @@ GEM
     zeitwerk (2.4.2)
 
 PLATFORMS
+  ruby
   x64-mingw32
   x86_64-linux
 
 DEPENDENCIES
   apexcharts
-  bootsnap (>= 1.4.2)
+  bootsnap (>= 1.1.2)
   byebug
   capybara (>= 2.15)
   devise
@@ -419,7 +420,7 @@ DEPENDENCIES
   haml
   haml-rails
   jbuilder (~> 2.7)
-  pg (>= 0.18, < 2.0)
+  pg
   platform_agent
   puma (~> 4.1)
   rack-ratelimit
@@ -441,7 +442,7 @@ DEPENDENCIES
   webpacker (~> 4.0)
 
 RUBY VERSION
-   ruby 2.6.6p146
+   ruby 2.7.0p0
 
 BUNDLED WITH
-   2.2.25
+   2.2.30
