@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def blacklist_and_signed_in?
-    user_signed_in? && permission_svc.blacklisted?(self.class)
+    user_signed_in? && !permission_svc.blacklisted?(self.class)
   end
 
   def permission_svc

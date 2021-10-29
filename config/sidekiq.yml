@@ -1,0 +1,5 @@
+---
+:schedule:
+  NextBurndown:
+    class: NextBurndown
+    cron: "5 0 * * *"

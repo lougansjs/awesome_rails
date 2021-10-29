@@ -68,3 +68,8 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 /** HIDE-SPINNERS-END **/
+
+.edit_permissions, .save_permissions {
+  text-decoration: underline;
+  cursor: pointer;
+}

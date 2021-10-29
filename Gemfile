@@ -29,6 +29,11 @@ gem 'haml-rails'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+gem 'aws-sdk-s3'
+gem 'lerolero_generator'
+gem 'sidekiq-scheduler'
+gem 'stisla-rails'
+
 # [Graphics]
 gem 'apexcharts'
 gem 'groupdate'

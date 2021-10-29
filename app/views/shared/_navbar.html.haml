@@ -1,3 +1,4 @@
+- photo = current_user.photo.attachment.nil? ? "https://demo.getstisla.com/assets/img/avatar/avatar-1.png" : current_user.photo
 %nav.navbar.navbar-expand-lg.main-navbar
   %form.form-inline.mr-auto
     %ul.navbar-nav.mr-3
@@ -156,20 +157,20 @@
             %i.fas.fa-chevron-right
     %li.dropdown
       %a.nav-link.dropdown-toggle.nav-link-lg.nav-link-user{"data-toggle" => "dropdown", :href => "#"}
-        = image_tag('avatar/avatar-1.png', class: 'rounded-circle mr-1')
+        = image_tag(photo, class: 'rounded-circle mr-1')
         .d-sm-none.d-lg-inline-block
           = current_user.full_name
       .dropdown-menu.dropdown-menu-right
         .dropdown-title Logged in 5 min ago
-        %a.dropdown-item.has-icon{:href => "features-profile.html"}
+        %a.dropdown-item.has-icon{:href => "/users/edit"}
           %i.far.fa-user
-          Profile
-        %a.dropdown-item.has-icon{:href => "features-activities.html"}
+          Perfil
+        %a.dropdown-item.has-icon{:href => "#"}
           %i.fas.fa-bolt
-          Activities
-        %a.dropdown-item.has-icon{:href => "features-settings.html"}
+          Atividades
+        %a.dropdown-item.has-icon{:href => "#"}
           %i.fas.fa-cog
-          Settings
+          Configurações
         .dropdown-divider
         = link_to destroy_user_session_path, method: :delete, class: "dropdown-item has-icon text-danger" do
           %i.fas.fa-sign-out-alt

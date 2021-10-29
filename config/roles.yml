@@ -4,3 +4,4 @@ roles:
   observer:
     - BurndownsController
     - DashboardsController
+    - Users::RegistrationsController

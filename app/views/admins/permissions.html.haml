@@ -1,0 +1,21 @@
+.container-fluid
+  .row 
+    .col-12.col-sm-12.col-lg-6
+      .card.mt-4
+        .card-header
+          %h4 Usuários do sistema
+        .card-body
+          %ul.list-unstyled.list-unstyled-border.list-unstyled-noborder
+            - @users.each do |user|
+              - photo = user.photo.attachment.nil? ? "https://demo.getstisla.com/assets/img/avatar/avatar-1.png" : user.photo
+              %li.media 
+                = image_tag photo, :alt => "image", :width => "70", class: "mr-3 rounded-circle"
+                .media-body
+                  .media-right
+                    - if user.admin?
+                      .text-primary Administrador
+                    - else
+                      .text-warning Colaborador
+                  .media-title.mb-1= user.full_name.blank? ? "##{user.id} #{user.email}" : "##{user.id} #{user.full_name}"
+                  .text-time Department
+                  = render partial: 'form', locals: {user: user}
