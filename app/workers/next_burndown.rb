@@ -8,7 +8,7 @@ class NextBurndown
   def perform
     burndown = Burndown.where(in_use: true, status: 1).first
     yesterday = Date.current.yesterday
-    next_burndown(burndown) if burndown.start_end == yesterday
+    next_burndown(burndown) if burndown.date_end == yesterday
   end
 
   def next_burndown(burndown)
@@ -16,7 +16,7 @@ class NextBurndown
     next_burndown = Burndown.where(sprint: (sprint + 1), in_use: false).first
     unless next_burndown.present?
       date_start = Date.current
-      date_end = date_start + 2.weeks
+      date_end = date_start + 1.9.weeks
       next_burndown = Burndown.create(
         sprint: (sprint + 1),
         date_start: date_start,

@@ -58,12 +58,16 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    airbrake (12.0.0)
+      airbrake-ruby (~> 6.0)
+    airbrake-ruby (6.0.1)
+      rbtree3 (~> 0.5)
     apexcharts (0.1.11)
       dry-schema (~> 1.5)
       smart_kv (~> 0.2.8)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.519.0)
+    aws-partitions (1.520.1)
     aws-sdk-core (3.121.3)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
@@ -91,8 +95,9 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
-    capybara (3.35.3)
+    capybara (3.36.0)
       addressable
+      matrix
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
       rack (>= 1.6.0)
@@ -104,7 +109,7 @@ GEM
       marcel (~> 1.0)
       nokogiri (~> 1.10, >= 1.10.4)
       rubyzip (>= 1.3.0, < 3)
-    childprocess (3.0.0)
+    childprocess (4.1.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.1.9)
@@ -236,6 +241,7 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
+    matrix (0.4.2)
     method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
@@ -268,8 +274,10 @@ GEM
     puma (4.3.10)
       nio4r (~> 2.0)
     raabro (1.4.0)
-    racc (1.5.2)
+    racc (1.6.0)
     rack (2.2.3)
+    rack-protection (2.1.0)
+      rack
     rack-proxy (0.7.0)
       rack
     rack-ratelimit (1.2.1)
@@ -308,7 +316,8 @@ GEM
       activerecord (>= 5.2.4)
       activesupport (>= 5.2.4)
       i18n
-    redis (4.4.0)
+    rbtree3 (0.6.0)
+    redis (4.1.4)
     reek (6.0.6)
       kwalify (~> 0.7.0)
       parser (~> 3.0.0)
@@ -328,13 +337,14 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rexml (3.2.5)
     rodf (1.1.1)
       builder (>= 3.0)
       dry-inflector (~> 0.1)
       rubyzip (>= 1.0)
     ruby2_keywords (0.0.5)
-    ruby_parser (3.17.0)
-      sexp_processor (~> 4.15, >= 4.15.1)
+    ruby_parser (3.18.0)
+      sexp_processor (~> 4.16)
     rubycritic (4.6.1)
       flay (~> 2.8)
       flog (~> 4.4)
@@ -365,14 +375,16 @@ GEM
       activemodel (>= 5)
       elasticsearch (>= 6, < 7.14)
       hashie
-    selenium-webdriver (3.142.7)
-      childprocess (>= 0.5, < 4.0)
+    selenium-webdriver (4.0.3)
+      childprocess (>= 0.5, < 5.0)
+      rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
-    sexp_processor (4.15.3)
-    sidekiq (6.2.2)
-      connection_pool (>= 2.2.2)
+    sexp_processor (4.16.0)
+    sidekiq (5.2.9)
+      connection_pool (~> 2.2, >= 2.2.2)
       rack (~> 2.0)
-      redis (>= 4.2.0)
+      rack-protection (>= 1.5.0)
+      redis (>= 3.3.5, < 4.2)
     sidekiq-scheduler (3.1.0)
       e2mmap
       redis (>= 3, < 5)
@@ -411,7 +423,7 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2021.3)
+    tzinfo-data (1.2021.5)
       tzinfo (>= 1.0.0)
     unf (0.1.4)
       unf_ext
@@ -430,10 +442,10 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webdrivers (4.6.1)
+    webdrivers (5.0.0)
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
-      selenium-webdriver (>= 3.0, < 4.0)
+      selenium-webdriver (~> 4.0)
     webpacker (4.3.0)
       activesupport (>= 4.2)
       rack-proxy (>= 0.6.1)
@@ -443,7 +455,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.4.2)
+    zeitwerk (2.5.1)
 
 PLATFORMS
   ruby
@@ -451,6 +463,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  airbrake
   apexcharts
   aws-sdk-s3
   bootsnap (>= 1.1.2)
@@ -476,7 +489,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   searchkick
   selenium-webdriver
-  sidekiq
+  sidekiq (~> 5.2.8)
   sidekiq-scheduler
   spreadsheet_architect
   stisla-rails
