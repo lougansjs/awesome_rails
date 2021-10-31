@@ -29,6 +29,8 @@ gem 'haml-rails'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+gem 'sassc', '~> 2.1.0'
+
 gem 'aws-sdk-s3'
 gem 'lerolero_generator'
 gem 'sidekiq-scheduler'
