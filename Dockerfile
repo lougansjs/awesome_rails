@@ -1,4 +1,5 @@
 FROM ruby:2.6.6
+MAINTAINER lougansjs <lougans.lougans99@gmail.com>
 
 ENV NODE_VERSION 12
 ENV INSTALL_PATH /opt/app
