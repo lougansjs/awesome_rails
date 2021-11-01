@@ -2,21 +2,21 @@ version: '2'
 
 services:
 
-  # rails:
-  #   build: .
-  #   command: bash -c "bundle install && bundle exec rails s -p 3000 -b '0.0.0.0'"
-  #   container_name: awesome_rails
-  #   ports:
-  #     - 3000:3000
-  #   volumes:
-  #     - .:/opt/app
-  #   environment: 
-  #     - POSTGRES_USER=postgres
-  #     - POSTGRES_PASSWORD=postgres
-  #     - POSTGRES_HOST=db
-  #     - REDIS_URL=redis://redis:6379/0
-  #   depends_on:
-  #     - db
+  rails:
+    build: .
+    command: bash -c "bundle install && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    container_name: awesome_rails
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/opt/app
+    environment: 
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - db
   db:
     image: postgres:12-alpine
     environment:
@@ -45,8 +45,6 @@ services:
       - "6379:6379"
     volumes_from:
       - data_redis
-    environment:
-      - REDIS_URL=redis://redis:6379/0
 
   data_redis:
     image: cogniteev/echo
