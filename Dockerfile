@@ -19,6 +19,9 @@ RUN export LC_ALL="en_US.utf8"
 
 RUN mkdir -p $INSTALL_PATH
 
+ENV RAILS_ENV='production'
+ENV RACK_ENV='production'
+
 WORKDIR $INSTALL_PATH
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
