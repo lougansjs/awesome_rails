@@ -4,10 +4,10 @@ services:
 
   rails:
     build: .
-    command: bash -c "bundle install && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "bundle install && bundle exec rails s -p 80 -b '0.0.0.0'"
     container_name: awesome_rails
     ports:
-      - 3000:3000
+      - 80:80
     volumes:
       - .:/opt/app
     environment: 
@@ -22,14 +22,6 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-  web:
-    build:
-      context: .
-      dockerfile: ./nginx/Dockerfile
-    depends_on:
-      - rails
-    ports:
-      - 80:80
 
 
   
