@@ -12,6 +12,7 @@
         %th{:scope => "col", :width => "120"}
     %tbody
       - @burndowns.each do |burndown|
+        - status = progress_burndown(burndown)
         %tr
           %td{:scope => "row"}= burndown.id
           %td= burndown.date_start
@@ -19,7 +20,11 @@
           %td= burndown.metascore
           %td= burndown.sprint
           %td
-            .badge{class: "badge-#{burndown.status_class}"}= burndown.status_name
+            - if burndown.status == Burndown::STATUS[:in_progress]
+              .progress{style: "height: 1.5rem;border-radius:30px"}
+                .badge{class: "#{status[:class]}",role:"progressbar","data-width": "#{status[:progress]}%",style: "width: #{status[:progress]}%"}= "#{status[:title]} - #{status[:progress]}%"
+            - else
+              .badge{class: "badge-#{status[:class]}"}= status[:title]
           %td= burndown.created_at
           %td
             = link_to 'Editar', edit_burndown_path(burndown), class: 'btn btn-primary'
