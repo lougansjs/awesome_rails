@@ -2,7 +2,9 @@
 
 # Controller for Burndowns
 class BurndownsController < ApplicationController
+  include BurndownsHelper
   before_action :authenticate_user!
+
   def index
     date_current = Date.current.strftime('%Y-%m-%d')
     @burndown = Burndown.where("'#{date_current}' between date_start AND date_end").first
