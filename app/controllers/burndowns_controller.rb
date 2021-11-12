@@ -7,7 +7,7 @@ class BurndownsController < ApplicationController
 
   def index
     date_current = Date.current.strftime('%Y-%m-%d')
-    @burndown = Burndown.where("'#{date_current}' between date_start AND date_end").first
+    @burndown = Burndown.last
     planned = @burndown.planned_by_day
     activities = artia_svc.count_activities(@burndown.mapping_passed_days)
     executed = @burndown.executed_by_day(activities)
