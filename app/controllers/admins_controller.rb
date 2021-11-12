@@ -12,7 +12,7 @@ class AdminsController < ApplicationController
 
   def update_permissions
     @user = User.find(params[:user][:user_id])
-    if @user.update(role_name: params[:role_permission])
+    if @user.update(permission: params[:role_permission])
       redirect_to permissions_path
     else
       @users = User.all

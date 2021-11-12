@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @score.title
+%p
+  %b Qa points:
+  = @score.qa_points
+%p
+  %b Dev points:
+  = @score.dev_points
+%p
+  %b App:
+  = @score.app_id
+
+= link_to 'Edit', edit_score_path(@score)
+\|
+= link_to 'Back', scores_path
