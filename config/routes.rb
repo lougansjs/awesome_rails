@@ -4,15 +4,11 @@ require 'sidekiq/web'
 require 'sidekiq-scheduler/web'
 
 Rails.application.routes.draw do
-  # get 'apps/index'
-  # get 'apps/new'
-  # get 'apps/create'
-  # get 'apps/edit'
-  # get 'apps/update'
-  # get 'apps/show'
-  # get 'apps/destroy'
   resources :apps
-  resources :scores
+  resources :scores do
+    post :calculate, on: :collection
+    match 'functionalities/:id', to: 'scores#functionalities', via: :get, as: :functionalities, on: :collection
+  end
   resources :admins
   get :permissions, to: 'admins#permissions'
   put :permissions, to: 'admins#update_permissions'

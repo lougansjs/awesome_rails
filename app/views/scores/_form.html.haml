@@ -1,22 +1,67 @@
-= form_for @score do |f|
-  - if @score.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@score.errors.count, "error")} prohibited this score from being saved:"
-      %ul
-        - @score.errors.full_messages.each do |message|
-          %li= message
+.col-lg-12.col-12
+  = form_for(:anything, url: calculate_scores_path) do |f|
+    .row
+      .col-lg-12
+        .row
+          .col-lg-1
+            .form-group
+              = f.label :id, "ID da Atividade"
+              = f.number_field :id, class: 'form-control id-actv', required: true, value: nil
+          .col-lg-2
+            .form-group
+              = f.label :role, "Você é um..."
+              = f.select :role, [["Desenvolvedor", "developer"], ["Tester", "tester"]], {}, class: 'form-control', required: true
+          .col-lg-1
+            .form-group
+              = f.label :id_user, "ID do Usuário"
+              = f.number_field :id_user, class: 'form-control id-user', required: false, value: nil
+          .col-lg-1
+            .form-group
+              = f.label :app, "Produto"
+              = f.select :app, @apps.pluck(:name, :id), {}, class: 'form-control app', required: true
+          .col-lg-2.functionality.d-none
+            .form-group
+              = f.label :functionality, "Funcionalidade"
+              = f.select :functionality, [], {}, class: 'form-control select-functionality', required: true
+          .col-lg-3
+            .actions
+              = f.submit 'Calcular', class: "btn btn-success"
+      
+      -# .col-lg-6
+      -#   - if @burndown.errors.any?
+      -#     .alert.alert-danger.alert-dismissible.show.fade
+      -#       %button.close{'data-dismiss': 'alert'}
+      -#         %span x
+      -#       - @burndown.errors.full_messages.each do |message|
+      -#         %p= message
 
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :qa_points
-    = f.number_field :qa_points
-  .field
-    = f.label :dev_points
-    = f.number_field :dev_points
-  .field
-    = f.label :app_id
-    = f.number_field :app_id
-  .actions
-    = f.submit 'Save'
+:javascript
+  $(function() {
+    $('.id-actv').keypress(function(){
+      var sprint = $(this).val().length
+      if (sprint > 9) {
+        return false 
+      }
+    })
+  })
+
+  $(function() {
+    $('.app').click(function(){
+      var app = $(this).val()
+      if (app == '' || app == null) {
+        $('.select-functionality').empty()
+        $('.functionality').addClass('d-none')
+      } else {
+        $('.select-functionality').empty()
+        var url = "/scores/functionalities/" + app
+        $.get(url, function(data){
+          var options = '<option value="">Selecione</option>'
+          $.each(data, function(index, value){
+            options += '<option value="' + value.id + '">' + value.title + '</option>'
+          })
+          $('.functionality .select-functionality').html(options)
+          $('.functionality').removeClass('d-none')
+        })
+      }
+    })
+  })

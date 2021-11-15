@@ -1,0 +1,22 @@
+.col-lg-12.col-12
+  = form_for @app do |f|
+    .row
+      .col-lg-12
+        .row
+          .col-lg-2
+            .form-group
+              = f.label :name, "Nome do aplicativo"
+              = f.text_field :name, class: 'form-control', required: true
+          .col-lg-3
+            .actions
+              = f.submit 'Salvar', class: "btn btn-success"
+      
+      .col-lg-6
+        - if @app.errors.any?
+          .alert.alert-danger.alert-dismissible.show.fade
+            %button.close{'data-dismiss': 'alert'}
+              %span x
+            - @app.errors.full_messages.each do |message|
+              %p= message
+
+  = render 'apps_list'

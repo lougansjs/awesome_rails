@@ -1,0 +1,17 @@
+.row 
+  .col-lg-4 
+    .table-responsive.mt-5
+    %table.table.table-striped
+      %thead
+        %tr
+          %th{:scope => "col"} ID
+          %th{:scope => "col"} Aplicativo
+          %th{:scope => "col", :width => "120"} Ações
+      %tbody
+        - @apps.each do |app|
+          %tr
+            %td{:scope => "row"}= app.id
+            %td= app.name
+            %td
+              = link_to 'Editar', edit_app_path(app), class: 'btn btn-primary'
+              = link_to 'Excluir', app, method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' }, class: 'btn btn-danger'
