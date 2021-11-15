@@ -41,6 +41,7 @@ gem 'apexcharts'
 gem 'groupdate'
 
 # [HTTP]
+gem 'graphql-client'
 gem 'rest-client'
 
 # [Busca]
