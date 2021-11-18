@@ -119,6 +119,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    discord-notifier (1.0.3)
     docile (1.4.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -467,6 +468,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   devise
+  discord-notifier
   geared_pagination
   graphql-client
   groupdate

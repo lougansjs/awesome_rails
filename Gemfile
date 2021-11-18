@@ -32,6 +32,7 @@ gem 'haml-rails'
 gem 'sassc', '~> 2.1.0'
 
 gem 'aws-sdk-s3'
+gem 'discord-notifier'
 gem 'lerolero_generator'
 gem 'sidekiq-scheduler'
 gem 'stisla-rails'

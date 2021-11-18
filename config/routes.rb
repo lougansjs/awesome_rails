@@ -4,6 +4,7 @@ require 'sidekiq/web'
 require 'sidekiq-scheduler/web'
 
 Rails.application.routes.draw do
+  resources :reminders
   resources :apps
   resources :scores do
     post :calculate, on: :collection
