@@ -3,3 +3,6 @@
   NextBurndown:
     class: NextBurndown
     cron: "5 0 * * *"
+  NotifyReminder:
+    class: NotifyReminder
+    cron: "* * * * *"

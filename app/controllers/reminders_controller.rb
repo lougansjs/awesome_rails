@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
+# == RemindersController
 class RemindersController < ApplicationController
-  before_action :set_reminder, only: %i[show edit update destroy]
-
   def index
     @reminders = Reminder.all
     @reminder = Reminder.new
+    @frequence = @reminder.frequence
+    @days = @reminder.days
   end
 
   def show; end
@@ -17,7 +18,14 @@ class RemindersController < ApplicationController
   def edit; end
 
   def create
-    @reminder = Reminder.new(reminder_params)
+    attributes = reminder_params
+    schedule = { frequence: attributes[:frequence], time: '02:10',
+                 days: attributes[:days] }
+    @reminder = Reminder.new
+    @reminder.name = attributes[:name]
+    @reminder.message = attributes[:description]
+    @reminder.schedule = schedule
+    @reminder.active = true
 
     respond_to do |format|
       if @reminder.save
@@ -53,6 +61,6 @@ class RemindersController < ApplicationController
   private
 
   def reminder_params
-    params.fetch(:reminder, {})
+    params.permit(:name, :description, :frequence, days: [])
   end
 end
