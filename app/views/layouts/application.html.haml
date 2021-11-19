@@ -7,6 +7,7 @@
     %title= page_title
     = csrf_meta_tags
     = csp_meta_tag
+    = favicon_link_tag '/favicon.ico'
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag 'mobile', media: 'all', 'data-turbolinks-track': 'reload' if platform.mobile_app?
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
