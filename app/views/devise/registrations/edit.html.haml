@@ -41,16 +41,21 @@
                     .custom-file
                       = f.file_field :photo, class: "custom-file-input", id: "customFile"
                       = f.label :photo, "Foto de perfil", class: "custom-file-label"
-                  .form-group.col-md-6.col-12
+                  .form-group.col-md-4.col-12
                     = f.label :first_name, 'Nome'
                     = f.text_field :first_name, autofocus: true, class: 'form-control'
                     .invalid-feedback
                       Por favor, preencha seu nome
-                  .form-group.col-md-6.col-12
+                  .form-group.col-md-4.col-12
                     = f.label :last_name, 'Sobrenome'
                     = f.text_field :last_name, autofocus: true, class: 'form-control'
                     .invalid-feedback
                       Por favor, preencha seu sobrenome
+                  .form-group.col-md-4.col-12
+                    = f.label :nickname, 'Nickname'
+                    = f.text_field :nickname, placeholder: 'Seu usuário no github', autofocus: true, class: 'form-control'
+                    .invalid-feedback
+                      Por favor, preencha seu nickname
                 .row
                   .form-group.col-md-7.col-12
                     = f.label :email, 'E-mail'

@@ -8,6 +8,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def update
     @user = User.find(current_user.id)
+    set_nickname_to_github
     if @user.update(user_params)
       set_flash_message :notice, :updated
       redirect_to after_update_path_for(@user)
@@ -24,7 +25,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
 
   def user_params
-    params.require(:user).permit(:email, :first_name, :last_name, :city, :state, :zip, :country, :photo)
+    params.require(:user).permit(
+      :email, :first_name, :last_name, :nickname, :city, :state,
+      :zip, :country, :photo, socials: [:github]
+    )
+  end
+
+  def set_nickname_to_github
+    if params[:user][:nickname].present?
+      params[:user] = params[:user].merge(socials: { github: params[:user][:nickname] })
+    end
   end
 
   def utils_service

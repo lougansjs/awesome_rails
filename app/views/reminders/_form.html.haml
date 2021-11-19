@@ -1,0 +1,73 @@
+.col-lg-12.col-12
+  = form_tag @reminder, method: :post do
+    .row
+      .col-lg-12
+        .row
+          .col-lg-3 
+            .row 
+              .col-lg-12
+                .form-group
+                  = label_tag :name, "Nome do lembrete"
+                  = text_field_tag :name, "", class: 'form-control', required: true
+              .col-lg-12
+                .form-group
+                  = label_tag :description, "Descrição"
+                  = text_area_tag :description, "", class: 'form-control', required: true, style: 'height: 140px !important'
+              .col-lg-3
+                .actions
+                  = submit_tag 'Salvar', class: "btn btn-success"
+          
+          .col-lg-2
+            .form-group.form-frequence
+              = label_tag :frequence, "Frequência"
+              = select_tag :frequence, options_for_select(@frequence), {class: 'form-control select-frequence', required: true}
+            
+            .form-group.form-hour
+              = label_tag :hour, "Horário"
+              %input.form-control{type:"time", name: "time"}/
+            
+            .form-group.form-date.d-none
+              = label_tag :date, "Data"
+              %input.form-control{type: "date", name: "date"}/
+
+            .form-group.form-days
+              %label.d-block Dias
+              .checkbox-days
+                - @days.each do |day|
+                  .form-check.form-check-inline{style: "width: 42px"}
+                    = check_box_tag "days[]", "#{day[1]}", false, class: 'form-check-input', id: "day-#{day[1]}"
+                    %label.form-check-label{:for => "days"} #{day[0]}
+      
+      -# .col-lg-6
+      -#   - if @reminder.errors.any?
+      -#     .alert.alert-danger.alert-dismissible.show.fade
+      -#       %button.close{'data-dismiss': 'alert'}
+      -#         %span x
+      -#       - @reminder.errors.full_messages.each do |message|
+      -#         %p= message
+
+:javascript
+  $(function() {
+    var list = $('.checkbox-days input[type=checkbox]');
+    $('.select-frequence').change(function() {
+      list.prop('checked', false);
+      list.prop('disabled', false);
+      var frequence = $(this).val();
+      if (frequence == '2') {
+        $('.form-days').addClass('d-none')
+        $('.form-date').removeClass('d-none')
+      } else {
+        $('.form-days').removeClass('d-none')
+        $('.form-date').addClass('d-none')
+      }
+    });
+
+    var list = $('.checkbox-days input[type=checkbox]');
+    list.change(function() {
+      if (this.checked && $('.select-frequence').val() == '1') {
+        list.filter(':not(:checked)').prop('disabled', true);
+      } else{
+        list.prop('disabled', false);
+      }
+    })
+  });

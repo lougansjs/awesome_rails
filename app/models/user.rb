@@ -11,7 +11,7 @@ class User < ApplicationRecord
   before_save :set_role
 
   def set_role
-    self.role_name = 'observer' if role_name.blank?
+    self.permission = 'observer' if permission.blank?
   end
 
   def full_name
@@ -19,10 +19,10 @@ class User < ApplicationRecord
   end
 
   def admin?
-    role_name == 'admin'
+    permission == 'admin'
   end
 
   def observer?
-    role_name == 'observer'
+    permission == 'observer'
   end
 end

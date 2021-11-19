@@ -9,7 +9,7 @@ class PermissionService
 
   def allowed?(controller)
     return true if @user.admin?
-    return true if @user.role_name.nil?
+    return true if @user.permission.nil?
 
     Roles['roles']['observer'].include?(controller.to_s) if @user.observer?
   end

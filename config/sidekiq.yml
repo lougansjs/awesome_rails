@@ -1,5 +1,12 @@
 ---
+:concurrency: <%= ENV["SIDEKIQ_CONCONCURRENCY"] || 10 %>
+:logfile: log/sidekiq.log
+:pidfile: tmp/pids/sidekiq.pid
+
 :schedule:
   NextBurndown:
     class: NextBurndown
     cron: "5 0 * * *"
+  NotifyReminder:
+    class: NotifyReminder
+    cron: "*/1 * * * *"

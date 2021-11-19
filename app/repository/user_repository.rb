@@ -7,10 +7,10 @@ class UserRepository
   end
 
   def observer_users
-    @model.where(role_name: 'observer')
+    @model.where(permission: 'observer')
   end
 
   def admin_users
-    @model.where(role_name: 'admin')
+    @model.where(permission: 'admin')
   end
 end
