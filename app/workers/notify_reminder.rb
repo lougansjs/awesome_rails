@@ -18,6 +18,7 @@ class NotifyReminder
           reminder_service.send_reminder(message)
         end
       else
+        actual_date = actual_date.strftime('%Y-%m-%d')
         date = reminder.schedule['day']
         if date == actual_date.day.to_s
           message = reminder.message
@@ -26,6 +27,9 @@ class NotifyReminder
       end
     end
   end
+
+  # TODO: Fazer método que exclui o registro mensal depois que ele for enviado
+  # Isso tem que ir para o service
 
   def reminder_service
     @reminder_service ||= ReminderService.new
