@@ -24,17 +24,17 @@
             
             .form-group.form-hour
               = label_tag :hour, "Horário"
-              %input.form-control{:type => "time"}/
+              %input.form-control{type:"time", name: "time"}/
             
             .form-group.form-date.d-none
               = label_tag :date, "Data"
-              %input.form-control{:type => "date"}/
+              %input.form-control{type: "date", name: "date"}/
 
             .form-group.form-days
               %label.d-block Dias
               .checkbox-days
-                .form-check.form-check-inline{style: "width: 42px"}
-                  - @days.each do |day|
+                - @days.each do |day|
+                  .form-check.form-check-inline{style: "width: 42px"}
                     = check_box_tag "days[]", "#{day[1]}", false, class: 'form-check-input', id: "day-#{day[1]}"
                     %label.form-check-label{:for => "days"} #{day[0]}
       

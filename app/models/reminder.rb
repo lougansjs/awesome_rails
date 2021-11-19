@@ -9,13 +9,13 @@ class Reminder < ApplicationRecord
   }.freeze
 
   DAYS = {
-    sunday: [1, 'Domingo'],
-    monday: [2, 'Segunda-feira'],
-    tuesday: [3, 'Terça-feira'],
-    wednesday: [4, 'Quarta-feira'],
-    thursday: [5, 'Quinta-feira'],
-    friday: [6, 'Sexta-feira'],
-    saturday: [7, 'Sábado']
+    sunday: [0, 'Domingo'],
+    monday: [1, 'Segunda-feira'],
+    tuesday: [2, 'Terça-feira'],
+    wednesday: [3, 'Quarta-feira'],
+    thursday: [4, 'Quinta-feira'],
+    friday: [5, 'Sexta-feira'],
+    saturday: [6, 'Sábado']
   }.freeze
 
   def frequence

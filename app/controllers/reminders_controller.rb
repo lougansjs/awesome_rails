@@ -17,10 +17,13 @@ class RemindersController < ApplicationController
 
   def edit; end
 
+  def schedule_by_frequence(attributes)
+    reminder_service.schedule_by_frequence(attributes)
+  end
+
   def create
     attributes = reminder_params
-    schedule = { frequence: attributes[:frequence], time: '02:10',
-                 days: attributes[:days] }
+    schedule = schedule_by_frequence(attributes)
     @reminder = Reminder.new
     @reminder.name = attributes[:name]
     @reminder.message = attributes[:description]
@@ -61,6 +64,10 @@ class RemindersController < ApplicationController
   private
 
   def reminder_params
-    params.permit(:name, :description, :frequence, days: [])
+    params.permit(:name, :description, :frequence, :time, :date, days: [])
+  end
+
+  def reminder_service
+    @reminder_service ||= ReminderService.new
   end
 end
