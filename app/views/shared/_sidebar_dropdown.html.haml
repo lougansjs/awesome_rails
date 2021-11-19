@@ -8,17 +8,15 @@
     %li
       = link_to 'Gráfico', burndowns_path
 
-%li.nav-item.dropdown
-  %a.nav-link.has-dropdown{"data-toggle" => "dropdown", :href => "#"}
-    %i{:class => icon}
-    %span= 'Pontuação'
-  %ul.dropdown-menu
-    %li
-      = link_to 'Estimativa de Pontuação', scores_path
-    -# %li
-    -#   = link_to 'Gráfico', burndowns_path
-
 - if current_user.admin?
+  %li.nav-item.dropdown
+    %a.nav-link.has-dropdown{"data-toggle" => "dropdown", :href => "#"}
+      %i{:class => icon}
+      %span= 'Pontuação'
+    %ul.dropdown-menu
+      %li
+        = link_to 'Estimativa de Pontuação', scores_path
+
   %li.nav-item.dropdown
     %a.nav-link.has-dropdown{"data-toggle" => "dropdown", :href => "#"}
       %i{:class => icon}
