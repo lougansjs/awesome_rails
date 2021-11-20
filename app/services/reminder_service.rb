@@ -6,7 +6,11 @@ class ReminderService
     # Send a message to Discord.
     return if message.blank?
 
-    Discord::Notifier.message(message)
+    begin
+      Discord::Notifier.message(message)
+    rescue StandardError
+      false
+    end
   end
 
   def schedule_by_frequence(attributes)
@@ -22,5 +26,11 @@ class ReminderService
                    day: attributes[:date] }
     end
     schedule
+  end
+
+  def destroy_reminder(reminder)
+    if reminder.schedule['frequence'].to_i == Reminder::FREQUENCE[:monthly]
+      reminder.destroy
+    end
   end
 end
