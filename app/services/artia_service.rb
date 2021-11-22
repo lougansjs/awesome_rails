@@ -15,7 +15,7 @@ class ArtiaService
   ListActivities = SWAPI::Client.parse <<-'GRAPHQL'
     query($folder_id: Int!){
       listingActivities(accountId: 1573596, folderId: $folder_id){
-        id, title, status, actualEnd, customStatus{ id }
+        id, title, status, actualEnd, folderTypeName, customStatus{ id }
       }
     }
   GRAPHQL
@@ -52,6 +52,10 @@ class ArtiaService
     91, 105, 1940, 1943, 8069, 10_130, 26_017,
     26_018, 31_339, 136_419, 154_898, 1941,
     31_336, 31_338, 31_351, 31_356, 10_130
+  ].freeze
+
+  ACTIVITIES_TYPE = [
+    '7 - Bug Produção', '11 - Solicitação de Serviço', '2 - Dúvida'
   ].freeze
 
   def initialize(list = true)
@@ -116,7 +120,10 @@ class ArtiaService
   def count_activities(dates)
     list = []
     dates = dates
-    concluded = concluded_activities.select { |activity| activity['actualEnd'].to_date.between?(dates.first, dates.last) }
+    concluded = concluded_activities.select do |activity|
+      activity['actualEnd'].to_date.between?(dates.first, dates.last) &&
+        ACTIVITIES_TYPE.include?(activity['folderTypeName']&.to_s)
+    end
     dates.each do |date|
       list << concluded.select { |activity| activity['actualEnd'].to_date == date }.count
     end
