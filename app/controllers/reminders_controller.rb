@@ -2,6 +2,7 @@
 
 # == RemindersController
 class RemindersController < ApplicationController
+  include RemindersHelper
   def index
     @reminders = Reminder.all
     @reminder = Reminder.new
@@ -32,8 +33,8 @@ class RemindersController < ApplicationController
 
     respond_to do |format|
       if @reminder.save
-        format.html { redirect_to @reminder, notice: 'Reminder was successfully created.' }
-        format.json { render :show, status: :created, location: @reminder }
+        format.html { redirect_to reminders_path, notice: 'O lembrete foi criado com sucesso.' }
+        format.json { render :index, status: :created, location: @reminder }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @reminder.errors, status: :unprocessable_entity }
@@ -54,9 +55,10 @@ class RemindersController < ApplicationController
   end
 
   def destroy
-    @reminder.destroy
+    reminder = Reminder.find(params[:id])
+    reminder.destroy
     respond_to do |format|
-      format.html { redirect_to reminders_url, notice: 'Reminder was successfully destroyed.' }
+      format.html { redirect_to reminders_path, notice: 'O lembrete foi apagado.' }
       format.json { head :no_content }
     end
   end

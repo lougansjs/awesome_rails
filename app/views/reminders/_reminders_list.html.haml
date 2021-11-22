@@ -1,0 +1,19 @@
+.table-responsive
+  %table.table.table-striped
+    %thead
+      %tr
+        %th{:scope => "col"} ID
+        %th{:scope => "col"} Nome do Lembrete
+        %th{:scope => "col"} Tipo
+        %th{:scope => "col"} Data de criação
+        %th{:scope => "col", :width => "120"}
+    %tbody
+      - @reminders.each do |reminder|
+        - type = get_reminder_type(reminder.schedule['frequence'])
+        %tr
+          %td{:scope => "row"}= reminder.id
+          %td= reminder.name
+          %td= type
+          %td= reminder.created_at
+          %td
+            = link_to 'Excluir', reminder, method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' }, class: 'btn btn-danger'

@@ -1,9 +1,9 @@
-.col-lg-12.col-12
+.col-lg-6.col-12
   = form_tag @reminder, method: :post do
     .row
       .col-lg-12
         .row
-          .col-lg-3 
+          .col-lg-6 
             .row 
               .col-lg-12
                 .form-group
@@ -17,7 +17,7 @@
                 .actions
                   = submit_tag 'Salvar', class: "btn btn-success"
           
-          .col-lg-2
+          .col-lg-4
             .form-group.form-frequence
               = label_tag :frequence, "Frequência"
               = select_tag :frequence, options_for_select(@frequence), {class: 'form-control select-frequence', required: true}
@@ -37,7 +37,7 @@
                   .form-check.form-check-inline{style: "width: 42px"}
                     = check_box_tag "days[]", "#{day[1]}", false, class: 'form-check-input', id: "day-#{day[1]}"
                     %label.form-check-label{:for => "days"} #{day[0]}
-      
+
       -# .col-lg-6
       -#   - if @reminder.errors.any?
       -#     .alert.alert-danger.alert-dismissible.show.fade
@@ -45,6 +45,9 @@
       -#         %span x
       -#       - @reminder.errors.full_messages.each do |message|
       -#         %p= message
+
+.col-lg-6.col-12
+  = render 'reminders_list'
 
 :javascript
   $(function() {
