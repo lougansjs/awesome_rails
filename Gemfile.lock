@@ -58,6 +58,8 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    airbrake (13.0.1)
+      airbrake-ruby (~> 6.0)
     airbrake-ruby (6.1.0)
       rbtree3 (~> 0.5)
     apexcharts (0.1.11)
@@ -465,7 +467,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  airbrake-ruby
+  airbrake
   apexcharts
   aws-sdk-s3
   bootsnap (>= 1.1.2)
@@ -505,7 +507,7 @@ DEPENDENCIES
   webpacker (~> 4.0)
 
 RUBY VERSION
-   ruby 2.6.6p146
+   ruby 3.0.0p0
 
 BUNDLED WITH
-   2.2.30
+   2.3.13
