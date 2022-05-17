@@ -71,6 +71,8 @@ class ArtiaService
     raise QueryError, response.errors[:data].join(', ') if response.errors.any?
 
     response.data
+  rescue StandardError => e
+    Airbrake.notify(e)
   end
 
   def client_context
@@ -80,6 +82,8 @@ class ArtiaService
         variables: { client_id: @client_id, secret: @secret }
       ).data.authentication_by_client.token
     }
+  rescue StandardError => e
+    Airbrake.notify(e)
   end
 
   def search_activities
@@ -92,10 +96,14 @@ class ArtiaService
       list << data.map(&:to_h)
     end
     list.flatten
+  rescue StandardError => e
+    Airbrake.notify(e)
   end
 
   def search_activity(id, app)
     query(SearchActivity, id: id, folder_id: FOLDERS[app]).show_activity.to_h
+  rescue StandardError => e
+    Airbrake.notify(e)
   end
 
   def search_time_entries(activity_id, app)
@@ -109,12 +117,16 @@ class ArtiaService
 
       activity['status'] == true && [95].include?(activity['customStatus']['id'].to_i)
     end
+  rescue StandardError => e
+    Airbrake.notify(e)
   end
 
   def filter_activities
     @activities.select do |activity|
       activity['status'] == false && IDS.include?(activity['customStatus']['id'].to_i)
     end
+  rescue StandardError => e
+    Airbrake.notify(e)
   end
 
   def count_activities(dates)
@@ -128,5 +140,7 @@ class ArtiaService
       list << concluded.select { |activity| activity['actualEnd'].to_date == date }.count
     end
     list
+  rescue StandardError => e
+    Airbrake.notify(e)
   end
 end

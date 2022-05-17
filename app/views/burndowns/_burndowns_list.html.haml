@@ -2,14 +2,14 @@
   %table.table.table-striped
     %thead
       %tr
-        %th{:scope => "col"} ID
-        %th{:scope => "col"} Data de Início
-        %th{:scope => "col"} Data de Término
-        %th{:scope => "col"} Meta
-        %th{:scope => "col"} Sprint
-        %th{:scope => "col"} Situação
+        %th{:scope => "col", :width => "20"} ID
+        %th{:scope => "col", :width => "50"} Data de Início
+        %th{:scope => "col", :width => "50"} Data de Término
+        %th{:scope => "col", :width => "30"} Meta
+        %th{:scope => "col", :width => "30"} Sprint
+        %th{:scope => "col", :width => "50"} Situação
         %th{:scope => "col"} Data de criação
-        %th{:scope => "col", :width => "120"}
+        %th{:scope => "col", :width => "140"}
     %tbody
       - @burndowns.each do |burndown|
         - status = progress_burndown(burndown)
@@ -27,9 +27,11 @@
               .badge{class: "badge-#{status[:class]}"}= status[:title]
           %td= burndown.created_at
           %td
+            - if burndown.burndown_in_use?
+              = link_to close_sprint_burndown_path(burndown), :class => "btn btn-success", :style => "margin-right: 4px;"  do
+                %i{class: "fas fa-check"}
             = link_to 'Editar', edit_burndown_path(burndown), class: 'btn btn-primary'
             - if burndown.burndown_in_use?
               %a.btn.btn-secondary Excluir
             - else
               = link_to 'Excluir', burndown, method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' }, class: 'btn btn-danger'
-              
