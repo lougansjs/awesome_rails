@@ -8,6 +8,9 @@ class Burndown < ApplicationRecord
   IN_PROGRESS = 1
   FINISHED = 2
 
+  SERIES = [{ name: 'Planejado' }, { name: 'Realizado' }].freeze
+  OPTIONS = { theme: 'rainbow' }.freeze
+
   STATUS = {
     pending: PENDING,
     in_progress: IN_PROGRESS,
@@ -16,6 +19,14 @@ class Burndown < ApplicationRecord
 
   validates :date_start, :date_end, :metascore, :sprint, presence: true
   before_create :verify_rules
+
+  def default_burndown
+    {
+      sprint: 'livre',
+      description: 'Não há dados para gerar o gráfico. Crie um novo burndown para começar.',
+      default: true
+    }
+  end
 
   def start_burndown!
     self.status = STATUS[:in_progress]
@@ -39,6 +50,20 @@ class Burndown < ApplicationRecord
     return 'success' if status == STATUS[:finished]
   end
 
+  def close_sprint
+    self.status = STATUS[:finished]
+    self.in_use = false
+  end
+
+  def burndown_is_pending?
+    status == STATUS[:pending]
+  end
+
+  def burndown_is_finished?
+    status == STATUS[:finished]
+  end
+
+  # Burndown está ativo
   def burndown_in_use?
     in_use
   end

@@ -58,6 +58,8 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    airbrake-ruby (6.1.0)
+      rbtree3 (~> 0.5)
     apexcharts (0.1.11)
       dry-schema (~> 1.5)
       smart_kv (~> 0.2.8)
@@ -315,6 +317,7 @@ GEM
       activerecord (>= 5.2.4)
       activesupport (>= 5.2.4)
       i18n
+    rbtree3 (0.7.0)
     redis (4.5.1)
     reek (6.0.6)
       kwalify (~> 0.7.0)
@@ -462,6 +465,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  airbrake-ruby
   apexcharts
   aws-sdk-s3
   bootsnap (>= 1.1.2)

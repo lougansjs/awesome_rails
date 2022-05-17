@@ -12,6 +12,8 @@ class PermissionService
     return true if @user.permission.nil?
 
     Roles['roles']['observer'].include?(controller.to_s) if @user.observer?
+  rescue StandardError => e
+    Airbrake.notify(e)
   end
 
   def blacklisted?(controller)

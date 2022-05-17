@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   resources :admins
   get :permissions, to: 'admins#permissions'
   put :permissions, to: 'admins#update_permissions'
-  resources :burndowns
+  resources :burndowns do
+    get :close_sprint, on: :member
+  end
   resources :movies
   get 'dashboards/index'
   devise_for :users, controllers: {

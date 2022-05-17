@@ -3,7 +3,7 @@
     .section-header
       %h1 Gráfico Burndown
     .section-body
-      %h2.section-title Sprint #{@burndown.sprint}
+      %h2.section-title Sprint #{@burndown[:sprint]}
       .row
         .col-lg-12.col-12
-          = line_chart(@series, @options)
+          = line_chart(@burndown[:series], @burndown[:options]) rescue @burndown[:description]

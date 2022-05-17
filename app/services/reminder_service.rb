@@ -26,11 +26,15 @@ class ReminderService
                    day: attributes[:date] }
     end
     schedule
+  rescue StandardError => e
+    Airbrake.notify(e)
   end
 
   def destroy_reminder(reminder)
     if reminder.schedule['frequence'].to_i == Reminder::FREQUENCE[:monthly]
       reminder.destroy
     end
+  rescue StandardError => e
+    Airbrake.notify(e)
   end
 end
