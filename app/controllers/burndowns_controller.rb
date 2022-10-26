@@ -6,13 +6,7 @@ class BurndownsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    date_current = Date.current.strftime('%Y-%m-%d')
-    @burndown = Burndown.where("'#{date_current}' between date_start AND date_end").first
-    planned = @burndown.planned_by_day
-    activities = artia_svc.count_activities(@burndown.mapping_passed_days)
-    executed = @burndown.executed_by_day(activities)
-    @series = [{ name: 'Planejado', data: planned }, { name: 'Realizado', data: executed }]
-    @options = { theme: 'rainbow' }
+    @burndown = load_chart
   end
 
   def new
@@ -43,11 +37,26 @@ class BurndownsController < ApplicationController
     end
   end
 
+  def close_sprint
+    burndown = Burndown.find(params[:id])
+    burndown.close_sprint
+    burndown.save
+    redirect_to burndowns_path
+  end
+
+  def load_chart
+    burndown_svc.data
+  end
+
   def burndown_params
     params.require(:burndown).permit(:date_start, :date_end, :metascore, :sprint)
   end
 
   def artia_svc
     @artia_svc = ArtiaService.new
+  end
+
+  def burndown_svc
+    @burndown_svc = BurndownService.new
   end
 end

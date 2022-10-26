@@ -2,6 +2,9 @@
 docker:
 	sudo docker-compose up
 
+build:
+	sudo docker-compose up --build
+
 # Necessario quando precisar rodar algum comando no servidor
 bash:
 	sudo docker-compose exec rails /bin/bash

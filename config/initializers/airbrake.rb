@@ -9,14 +9,15 @@
 #
 # Configuration details:
 # https://github.com/airbrake/airbrake-ruby#configuration
-if defined? Airbrake
+if (project_id = Rails.application.credentials[Rails.env.to_sym][:airbrake][:airbrake_project_id]) &&
+   project_key = (Rails.application.credentials[Rails.env.to_sym][:airbrake][:airbrake_project_key])
   Airbrake.configure do |c|
     # You must set both project_id & project_key. To find your project_id and
     # project_key navigate to your project's General Settings and copy the
     # values from the right sidebar.
     # https://github.com/airbrake/airbrake-ruby#project_id--project_key
-    c.project_id = Rails.application.credentials[Rails.env.to_sym][:airbrake][:airbrake_project_id]
-    c.project_key = Rails.application.credentials[Rails.env.to_sym][:airbrake][:airbrake_project_key]
+    c.project_id = project_id
+    c.project_key = project_key
 
     # Configures the root directory of your project. Expects a String or a
     # Pathname, which represents the path to your project. Providing this option
@@ -71,4 +72,9 @@ if defined? Airbrake
   # integration with the Logger class from stdlib.
   # https://github.com/airbrake/airbrake#logger
   # Rails.logger = Airbrake::AirbrakeLogger.new(Rails.logger)
+else
+  Rails.logger.warn(
+    "#{__FILE__}: Airbrake project id or project key is not set. " \
+    "Skipping Airbrake configuration"
+  )
 end
