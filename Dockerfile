@@ -1,4 +1,4 @@
-FROM ruby:2.6.6
+FROM ruby:3.0.0
 MAINTAINER lougansjs <lougans.lougans99@gmail.com>
 
 ENV NODE_VERSION 12
